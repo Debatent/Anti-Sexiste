@@ -16,6 +16,15 @@
 		CEB0AE9A24056D75008E7720 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB0AE9824056D75008E7720 /* LaunchScreen.storyboard */; };
 		CEB0AEA524056D75008E7720 /* Anti_SexisteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0AEA424056D75008E7720 /* Anti_SexisteTests.swift */; };
 		CEB0AEB024056D75008E7720 /* Anti_SexisteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0AEAF24056D75008E7720 /* Anti_SexisteUITests.swift */; };
+		CEEE69C324094D61008D5110 /* PostProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE69C224094D61008D5110 /* PostProtocol.swift */; };
+		CEEE69C524094ED4008D5110 /* TextPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE69C424094ED4008D5110 /* TextPost.swift */; };
+		CEEE69CB24094F70008D5110 /* TextResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE69CA24094F70008D5110 /* TextResponse.swift */; };
+		CEEE69CF24094FC8008D5110 /* CategoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE69CE24094FC8008D5110 /* CategoryProtocol.swift */; };
+		CEEE69D12409503E008D5110 /* ResponseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE69D02409503E008D5110 /* ResponseProtocol.swift */; };
+		CEEE69D324096E3D008D5110 /* TypeEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE69D224096E3D008D5110 /* TypeEnum.swift */; };
+		CEEE69D524096E5B008D5110 /* PlaceEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE69D424096E5B008D5110 /* PlaceEnum.swift */; };
+		CEEE69D824096F7B008D5110 /* ListPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE69D724096F7B008D5110 /* ListPost.swift */; };
+		CEEE69DA24096F8F008D5110 /* ListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE69D924096F8F008D5110 /* ListResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +60,15 @@
 		CEB0AEAB24056D75008E7720 /* Anti-SexisteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Anti-SexisteUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEB0AEAF24056D75008E7720 /* Anti_SexisteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anti_SexisteUITests.swift; sourceTree = "<group>"; };
 		CEB0AEB124056D75008E7720 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEEE69C224094D61008D5110 /* PostProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostProtocol.swift; sourceTree = "<group>"; };
+		CEEE69C424094ED4008D5110 /* TextPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPost.swift; sourceTree = "<group>"; };
+		CEEE69CA24094F70008D5110 /* TextResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextResponse.swift; sourceTree = "<group>"; };
+		CEEE69CE24094FC8008D5110 /* CategoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryProtocol.swift; sourceTree = "<group>"; };
+		CEEE69D02409503E008D5110 /* ResponseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseProtocol.swift; sourceTree = "<group>"; };
+		CEEE69D224096E3D008D5110 /* TypeEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeEnum.swift; sourceTree = "<group>"; };
+		CEEE69D424096E5B008D5110 /* PlaceEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceEnum.swift; sourceTree = "<group>"; };
+		CEEE69D724096F7B008D5110 /* ListPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPost.swift; sourceTree = "<group>"; };
+		CEEE69D924096F8F008D5110 /* ListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +119,8 @@
 		CEB0AE8924056D73008E7720 /* Anti-Sexiste */ = {
 			isa = PBXGroup;
 			children = (
+				CEEE69D624096F4A008D5110 /* ListObjects */,
+				CEEE69C124094CBA008D5110 /* Model */,
 				CEB0AE8A24056D73008E7720 /* AppDelegate.swift */,
 				CEB0AE8C24056D73008E7720 /* SceneDelegate.swift */,
 				CEB0AE9124056D73008E7720 /* ContentView.swift */,
@@ -137,6 +157,29 @@
 				CEB0AEB124056D75008E7720 /* Info.plist */,
 			);
 			path = "Anti-SexisteUITests";
+			sourceTree = "<group>";
+		};
+		CEEE69C124094CBA008D5110 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CEEE69C224094D61008D5110 /* PostProtocol.swift */,
+				CEEE69D02409503E008D5110 /* ResponseProtocol.swift */,
+				CEEE69C424094ED4008D5110 /* TextPost.swift */,
+				CEEE69CA24094F70008D5110 /* TextResponse.swift */,
+				CEEE69CE24094FC8008D5110 /* CategoryProtocol.swift */,
+				CEEE69D224096E3D008D5110 /* TypeEnum.swift */,
+				CEEE69D424096E5B008D5110 /* PlaceEnum.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CEEE69D624096F4A008D5110 /* ListObjects */ = {
+			isa = PBXGroup;
+			children = (
+				CEEE69D724096F7B008D5110 /* ListPost.swift */,
+				CEEE69D924096F8F008D5110 /* ListResponse.swift */,
+			);
+			path = ListObjects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,10 +313,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEEE69C324094D61008D5110 /* PostProtocol.swift in Sources */,
 				CEB0AE8B24056D73008E7720 /* AppDelegate.swift in Sources */,
+				CEEE69CB24094F70008D5110 /* TextResponse.swift in Sources */,
+				CEEE69C524094ED4008D5110 /* TextPost.swift in Sources */,
+				CEEE69D524096E5B008D5110 /* PlaceEnum.swift in Sources */,
 				CEB0AE9024056D73008E7720 /* Anti_Sexiste.xcdatamodeld in Sources */,
+				CEEE69D12409503E008D5110 /* ResponseProtocol.swift in Sources */,
+				CEEE69D824096F7B008D5110 /* ListPost.swift in Sources */,
 				CEB0AE9224056D73008E7720 /* ContentView.swift in Sources */,
 				CEB0AE8D24056D73008E7720 /* SceneDelegate.swift in Sources */,
+				CEEE69DA24096F8F008D5110 /* ListResponse.swift in Sources */,
+				CEEE69D324096E3D008D5110 /* TypeEnum.swift in Sources */,
+				CEEE69CF24094FC8008D5110 /* CategoryProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
