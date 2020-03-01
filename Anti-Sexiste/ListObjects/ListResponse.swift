@@ -10,11 +10,33 @@ import Foundation
 import SwiftUI
 
 
-
-class ListResponse : ObservableObject,Identifiable{
-    @Published var listResponse : [ResponseProtocol]
+class ListResponse : ObservableObject,Identifiable, Codable{
+    @Published var listResponse : [TextResponse]
     
-    init(listResponse : [ResponseProtocol]){
+    enum CodingKeys: String, CodingKey {
+        case listResponse
+    }
+    
+    required init(from decoder: Decoder) throws {
+        print(decoder)
+        print("ListResponse")
+            do {
+                let values = try decoder.container(keyedBy: CodingKeys.self)
+                self.listResponse = try values.decode([TextResponse].self, forKey: .listResponse)
+            } catch {print(error)
+                fatalError("cant decode")}
+        }
+
+    
+    func encode(to encoder: Encoder) throws {
+        
+    }
+
+    init(listResponse : [TextResponse]){
         self.listResponse = listResponse
+    }
+    
+    convenience init() {
+        self.init(listResponse : [TextResponse()])
     }
 }

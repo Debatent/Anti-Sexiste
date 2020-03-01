@@ -12,9 +12,18 @@ import SwiftUI
 
 
 class ListPost : ObservableObject,Identifiable{
-    @Published var listPost : [PostProtocol]
+    @Published var listPost : [Post]
     
-    init(listPost : [PostProtocol]){
+    init(listPost: [Post]) {
         self.listPost = listPost
+    }
+    enum CodingKeys: String, CodingKey {
+        case listPost = "posts"
+    }
+    
+
+    
+    func getListPost() -> [Post]{
+        return self.listPost
     }
 }

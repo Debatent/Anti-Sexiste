@@ -9,9 +9,9 @@
 import Foundation
 
 
-protocol ResponseProtocol: Codable {
+protocol ResponseProtocol {
     var idResponse : Int {get}
     var message : String {get}
-    var date : Date {get}
+    var date : String {get}
     var typeResponse : String {get}
 }

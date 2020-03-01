@@ -9,12 +9,12 @@
 import Foundation
 
 
-protocol PostProtocol:Codable{
+protocol PostProtocol{
     var idPost : Int {get}
     var placePost : String {get}
-    var responses : ListResponse{get}
+    var listResponse : ListResponse{get}
     var message : String {get}
     var title : String {get}
-    var date : Date {get}
+    var date : String {get}
     
 }

@@ -9,5 +9,5 @@
 import Foundation
 
 enum PlaceEnum {
-    case <#case#>
+    case street
 }

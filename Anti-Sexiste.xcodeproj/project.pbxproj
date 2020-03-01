@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE48B0DC240A697200CA0463 /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE48B0DB240A697200CA0463 /* ListRowView.swift */; };
 		CEB0AE8B24056D73008E7720 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0AE8A24056D73008E7720 /* AppDelegate.swift */; };
 		CEB0AE8D24056D73008E7720 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0AE8C24056D73008E7720 /* SceneDelegate.swift */; };
 		CEB0AE9024056D73008E7720 /* Anti_Sexiste.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CEB0AE8E24056D73008E7720 /* Anti_Sexiste.xcdatamodeld */; };
@@ -16,8 +17,9 @@
 		CEB0AE9A24056D75008E7720 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB0AE9824056D75008E7720 /* LaunchScreen.storyboard */; };
 		CEB0AEA524056D75008E7720 /* Anti_SexisteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0AEA424056D75008E7720 /* Anti_SexisteTests.swift */; };
 		CEB0AEB024056D75008E7720 /* Anti_SexisteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0AEAF24056D75008E7720 /* Anti_SexisteUITests.swift */; };
+		CEE1E16B240A5BB200046342 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = CEE1E16A240A5BB200046342 /* data.json */; };
 		CEEE69C324094D61008D5110 /* PostProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE69C224094D61008D5110 /* PostProtocol.swift */; };
-		CEEE69C524094ED4008D5110 /* TextPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE69C424094ED4008D5110 /* TextPost.swift */; };
+		CEEE69C524094ED4008D5110 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE69C424094ED4008D5110 /* Post.swift */; };
 		CEEE69CB24094F70008D5110 /* TextResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE69CA24094F70008D5110 /* TextResponse.swift */; };
 		CEEE69CF24094FC8008D5110 /* CategoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE69CE24094FC8008D5110 /* CategoryProtocol.swift */; };
 		CEEE69D12409503E008D5110 /* ResponseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE69D02409503E008D5110 /* ResponseProtocol.swift */; };
@@ -45,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE48B0DB240A697200CA0463 /* ListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRowView.swift; sourceTree = "<group>"; };
 		CEB0AE8724056D73008E7720 /* Anti-Sexiste.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Anti-Sexiste.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEB0AE8A24056D73008E7720 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEB0AE8C24056D73008E7720 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,8 +63,9 @@
 		CEB0AEAB24056D75008E7720 /* Anti-SexisteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Anti-SexisteUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEB0AEAF24056D75008E7720 /* Anti_SexisteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anti_SexisteUITests.swift; sourceTree = "<group>"; };
 		CEB0AEB124056D75008E7720 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEE1E16A240A5BB200046342 /* data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
 		CEEE69C224094D61008D5110 /* PostProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostProtocol.swift; sourceTree = "<group>"; };
-		CEEE69C424094ED4008D5110 /* TextPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPost.swift; sourceTree = "<group>"; };
+		CEEE69C424094ED4008D5110 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		CEEE69CA24094F70008D5110 /* TextResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextResponse.swift; sourceTree = "<group>"; };
 		CEEE69CE24094FC8008D5110 /* CategoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryProtocol.swift; sourceTree = "<group>"; };
 		CEEE69D02409503E008D5110 /* ResponseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseProtocol.swift; sourceTree = "<group>"; };
@@ -96,6 +100,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE48B0DA240A695200CA0463 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CE48B0DB240A697200CA0463 /* ListRowView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		CEB0AE7E24056D73008E7720 = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +136,7 @@
 				CEB0AE8A24056D73008E7720 /* AppDelegate.swift */,
 				CEB0AE8C24056D73008E7720 /* SceneDelegate.swift */,
 				CEB0AE9124056D73008E7720 /* ContentView.swift */,
+				CE48B0DA240A695200CA0463 /* Views */,
 				CEB0AE9324056D74008E7720 /* Assets.xcassets */,
 				CEB0AE9824056D75008E7720 /* LaunchScreen.storyboard */,
 				CEB0AE9B24056D75008E7720 /* Info.plist */,
@@ -164,11 +177,12 @@
 			children = (
 				CEEE69C224094D61008D5110 /* PostProtocol.swift */,
 				CEEE69D02409503E008D5110 /* ResponseProtocol.swift */,
-				CEEE69C424094ED4008D5110 /* TextPost.swift */,
+				CEEE69C424094ED4008D5110 /* Post.swift */,
 				CEEE69CA24094F70008D5110 /* TextResponse.swift */,
 				CEEE69CE24094FC8008D5110 /* CategoryProtocol.swift */,
 				CEEE69D224096E3D008D5110 /* TypeEnum.swift */,
 				CEEE69D424096E5B008D5110 /* PlaceEnum.swift */,
+				CEE1E16A240A5BB200046342 /* data.json */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -289,6 +303,7 @@
 				CEB0AE9A24056D75008E7720 /* LaunchScreen.storyboard in Resources */,
 				CEB0AE9724056D74008E7720 /* Preview Assets.xcassets in Resources */,
 				CEB0AE9424056D74008E7720 /* Assets.xcassets in Resources */,
+				CEE1E16B240A5BB200046342 /* data.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,9 +329,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEEE69C324094D61008D5110 /* PostProtocol.swift in Sources */,
+				CE48B0DC240A697200CA0463 /* ListRowView.swift in Sources */,
 				CEB0AE8B24056D73008E7720 /* AppDelegate.swift in Sources */,
 				CEEE69CB24094F70008D5110 /* TextResponse.swift in Sources */,
-				CEEE69C524094ED4008D5110 /* TextPost.swift in Sources */,
+				CEEE69C524094ED4008D5110 /* Post.swift in Sources */,
 				CEEE69D524096E5B008D5110 /* PlaceEnum.swift in Sources */,
 				CEB0AE9024056D73008E7720 /* Anti_Sexiste.xcdatamodeld in Sources */,
 				CEEE69D12409503E008D5110 /* ResponseProtocol.swift in Sources */,
