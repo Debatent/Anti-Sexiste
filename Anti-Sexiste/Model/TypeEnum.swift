@@ -11,4 +11,6 @@ import Foundation
 
 enum TypeEnum {
     case serious
+    case humor
+    case sarcastic
 }

@@ -12,7 +12,7 @@ import Foundation
 protocol PostProtocol{
     var idPost : Int {get}
     var placePost : String {get}
-    var listResponse : ListResponse{get}
+    var listResponse : [Response]{get set}
     var message : String {get}
     var title : String {get}
     var date : String {get}

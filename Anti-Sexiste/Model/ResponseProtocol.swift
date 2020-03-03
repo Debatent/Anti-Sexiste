@@ -9,7 +9,7 @@
 import Foundation
 
 
-protocol ResponseProtocol {
+protocol ResponseProtocol{
     var idResponse : Int {get}
     var message : String {get}
     var date : String {get}

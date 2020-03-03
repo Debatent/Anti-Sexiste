@@ -1,0 +1,17 @@
+[{"place" : "Tout",
+    "icon" : "icons8-check-all-50"
+},
+{"place" : "Rue",
+    "icon" : "icons8-streets-50"
+},
+ {"place" : "A la maison",
+     "icon" : "icons8-home-50"
+ },
+ {"place" : "Au travail",
+     "icon" : "icons8-desk-50"
+ },
+ {"place" : "A l'école",
+     "icon" : "icons8-school-50"
+ }
+]
+

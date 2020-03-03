@@ -1,5 +1,5 @@
 //
-//  TextResponse.swift
+//  Response.swift
 //  Anti-Sexiste
 //
 //  Created by user165109 on 28/02/2020.
@@ -9,7 +9,8 @@
 import Foundation
 
 
-class TextResponse: ResponseProtocol, Identifiable, Codable{
+class Response: Identifiable, Codable{
+    
     var idResponse: Int
     
     var message: String
@@ -19,6 +20,7 @@ class TextResponse: ResponseProtocol, Identifiable, Codable{
     var typeResponse: String
     
     
+
     
     
     init(idResponse : Int, message : String, date : String, typeResponse : String){

@@ -8,6 +8,9 @@
 
 import Foundation
 
-enum PlaceEnum {
-    case street
+enum PlaceEnum : String,CaseIterable {
+    case street = "street"
+    case house = "house"
+    case school = "school"
+    case work = "work"
 }
