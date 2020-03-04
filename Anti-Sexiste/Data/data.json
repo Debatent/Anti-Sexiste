@@ -2,7 +2,7 @@
     {
         "placePost" : "Rue",
         "idPost" : 0,
-        "message" : "Message du post 1",
+        "message" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In commodo nibh eget purus consectetur finibus. Donec non lacus volutpat, lacinia nibh in, suscipit neque. Ut sed leo eu augue auctor congue. Aliquam erat volutpat. Mauris mi libero, dignissim vitae risus ut, condimentum porttitor leo. Sed porta in metus eu aliquam. Curabitur vitae dignissim ex. Sed in quam venenatis, venenatis sem id, dapibus est. Morbi convallis, enim eget malesuada suscipit, est enim sollicitudin risus, a pharetra ex ligula quis mi.",
         "title" : "Post 1",
         "date" : "Saturday, November 25, 2017",
         "listResponse" :
@@ -11,14 +11,26 @@
             "idResponse" : 0,
             "message" : "response 1 du post 1",
             "date" : "Saturday, November 25, 2017",
-            "typeResponse" : "serious"
+            "typeResponse" : "Humour"
         },
             {
             "idResponse" : 1,
             "message" : "response 2 du post 1",
             "date" : "Saturday, November 25, 2017",
-            "typeResponse" : "serious"
-        }
+            "typeResponse" : "Sérieux"
+        },
+            {
+                "idResponse" : 0,
+                "message" : "response 1 du post 1",
+                "date" : "Saturday, November 25, 2017",
+                "typeResponse" : "Humour"
+            },
+                {
+                "idResponse" : 1,
+                "message" : "response 2 du post 1",
+                "date" : "Saturday, November 25, 2017",
+                "typeResponse" : "Colérique"
+            }
         ]
     },
     {

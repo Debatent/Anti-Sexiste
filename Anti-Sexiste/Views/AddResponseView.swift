@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct AddResponseView: View {
+    @Binding var showingAddPostView: Bool
     @ObservedObject var post : Post
     @State private var selection : Int = 0
     @State var response : Response = Response()
@@ -23,6 +24,6 @@ struct AddResponseView: View {
 
 struct AddResponseView_Previews: PreviewProvider {
     static var previews: some View {
-        AddResponseView(post: Post())
+        AddResponseView(showingAddPostView: .constant(false),post: Post())
     }
 }

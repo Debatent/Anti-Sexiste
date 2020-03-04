@@ -15,8 +15,6 @@ class Post :Identifiable,Codable, ObservableObject{
     var placePost: String
     
     var idPost: Int?
-    
-//    var id : Int { return self.idPost }
     	
     @Published var listResponse: [Response]
     

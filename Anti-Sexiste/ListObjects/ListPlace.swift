@@ -13,33 +13,11 @@ class ListPlace : Identifiable{
     var places : [Place]
     
     init(){
-        let data : Data
-        guard let file = Bundle.main.url(forResource: "place", withExtension: "json")
-            else {fatalError("Cant load file")}
-    
-
+        let data : Data = loadDATA(file: "place")
         do {
-            data = try Data(contentsOf: file)
-        }catch {fatalError("cant open content")}
-        
-        do {
-            
-            let decoder = JSONDecoder()
-            
-            self.places = try decoder.decode([Place].self,from:data)
-            
+            self.places = try JSONDecoder().decode([Place].self,from:data)
         } catch {print(error)
             fatalError("cant decode")}
     }
     
-}
-
-class Place:Identifiable,Codable{
-    var place : String
-    var icon : String
-    
-    init(place : String, icon : String){
-        self.place = place
-        self.icon = icon
-    }
 }

@@ -11,7 +11,7 @@ import Foundation
 
 class Response: Identifiable, Codable{
     
-    var idResponse: Int
+    var idResponse: Int?
     
     var message: String
     
@@ -23,13 +23,13 @@ class Response: Identifiable, Codable{
 
     
     
-    init(idResponse : Int, message : String, date : String, typeResponse : String){
+    init(idResponse : Int?, message : String, date : String, typeResponse : String){
         self.idResponse = idResponse
         self.message = message
         self.date = date
         self.typeResponse = typeResponse
     }
     convenience init() {
-        self.init(idResponse : 0, message : "", date : "", typeResponse : "serious")
+        self.init(idResponse : nil, message : "", date : "", typeResponse : "")
     }
 }

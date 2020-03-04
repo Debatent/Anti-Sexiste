@@ -15,20 +15,9 @@ class ListPost : ObservableObject,Identifiable{
     @Published var listPost : [Post]
     
     init(){
-        let data : Data
-        guard let file = Bundle.main.url(forResource: "data", withExtension: "json")
-            else {fatalError("Cant load file")}
-    
-
+        let data : Data = loadDATA(file: "data")
         do {
-            data = try Data(contentsOf: file)
-        }catch {fatalError("cant open content")}
-        
-        do {
-            
-            let decoder = JSONDecoder()
-            
-            self.listPost = try decoder.decode([Post].self,from:data)
+            self.listPost = try JSONDecoder().decode([Post].self,from:data)
         } catch {print(error)
             fatalError("cant decode")}
     }
@@ -41,6 +30,15 @@ class ListPost : ObservableObject,Identifiable{
     func addPost(post: Post){
         self.listPost.append(post)
     }
-  
-
+    
+    func filterList(place : String)-> [Post]{
+        if (place != "Tout"){
+            return self.listPost.filter { $0.placePost == place }
+        }
+        else{
+            return self.listPost
+        }
+    }
+    
+    
 }

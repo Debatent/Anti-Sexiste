@@ -9,41 +9,54 @@
 import SwiftUI
 
 struct AddPostView: View {
+    @Binding var showingAddPostView: Bool
     @State private var selection : Int = 0
     @State var post : Post = Post()
     var listPlace : ListPlace
     @ObservedObject var listPost : ListPost
     var body: some View {
         VStack{
+            Text("Ecrit ton post :")
+                .font(.title)
+                .fontWeight(.heavy)
+                .foregroundColor(Color.gray)
+                .multilineTextAlignment(.center)
+                .padding([.top, .leading, .trailing])
             Picker("Lieu",selection: $selection) {
                 ForEach(0 ..< listPlace.places.count) { index in
                     Text(self.listPlace.places[index].place).tag(index)
                     
                 }
             }.labelsHidden()
-        Form{
-            VStack{
-                Text("Titre :")
-                TextField("titre", text: $post.title)
-                Text("Message :")
-                TextField("message", text: $post.message)
-                                
+            Form{
+                VStack{
+                    Text("Titre :")
+                    TextField("titre", text: $post.title)
+                    Text("Message :")
+                    TextField("message", text: $post.message)
+                }
+                Button(action:{
+                    self.post.placePost = self.listPlace.places[self.selection].place
+                    let today = Date()
+                    let formatter1 = DateFormatter()
+                    formatter1.dateStyle = .long
+                    self.post.date = formatter1.string(from: today)
+                    print(self.post)
+                    self.listPost.addPost(post: self.post)
+                    self.post = Post()
+                    self.showingAddPostView = false
+                }) {
+                    Text("Publier")
+                }.frame(minWidth: 0, maxWidth: .infinity)
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.blue), Color.blue]), startPoint: .leading, endPoint: .trailing))
+                    .cornerRadius(40)
+                    .padding(.horizontal, 20)
             }
-            Button(action:{
-                self.post.placePost = self.listPlace.places[self.selection].place
-                let today = Date()
-                let formatter1 = DateFormatter()
-                formatter1.dateStyle = .long
-                self.post.date = formatter1.string(from: today)
-                print(self.post)
-                self.listPost.addPost(post: self.post)
-                self.post = Post()
-            }) {
-                Text("Go")
-                    .multilineTextAlignment(.center)
-            }
-            .padding(5.0)
-            }
+            
+            
+            
         }
         
     }
@@ -51,6 +64,6 @@ struct AddPostView: View {
 
 struct AddPostView_Previews: PreviewProvider {
     static var previews: some View {
-        AddPostView(listPlace: ListPlace(), listPost : ListPost())
+        AddPostView(showingAddPostView: .constant(false),listPlace: ListPlace(), listPost : ListPost())
     }
 }

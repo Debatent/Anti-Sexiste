@@ -13,8 +13,8 @@ struct ListRowPostView: View {
     @ObservedObject var post : Post
 
     var body: some View {
+        
         VStack{
-
             Text(post.title)
                 .font(.title)
                 .fontWeight(.thin)

@@ -16,5 +16,4 @@ protocol PostProtocol{
     var message : String {get}
     var title : String {get}
     var date : String {get}
-    
 }
