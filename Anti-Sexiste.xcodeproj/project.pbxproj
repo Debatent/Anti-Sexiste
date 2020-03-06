@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B7A7B19C240FBC1E00A7CA6B /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A7B19B240FBC1D00A7CA6B /* PostView.swift */; };
+		B736B63C24127F80009DE689 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B736B63B24127F80009DE689 /* PostView.swift */; };
 		B7A7B1A1240FE9FC00A7CA6B /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A7B1A0240FE9FC00A7CA6B /* Place.swift */; };
 		B7A7B1A3240FEA5C00A7CA6B /* JsonDATA.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A7B1A2240FEA5C00A7CA6B /* JsonDATA.swift */; };
 		B7A7B1AB240FF2A200A7CA6B /* TypeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A7B1AA240FF2A200A7CA6B /* TypeResponse.swift */; };
@@ -55,7 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B7A7B19B240FBC1D00A7CA6B /* PostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostView.swift; path = ../../../../Downloads/PostView.swift; sourceTree = "<group>"; };
+		B736B63B24127F80009DE689 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		B7A7B1A0240FE9FC00A7CA6B /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		B7A7B1A2240FEA5C00A7CA6B /* JsonDATA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDATA.swift; sourceTree = "<group>"; };
 		B7A7B1AA240FF2A200A7CA6B /* TypeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeResponse.swift; sourceTree = "<group>"; };
@@ -146,11 +146,11 @@
 		CE48B0DA240A695200CA0463 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B7A7B19B240FBC1D00A7CA6B /* PostView.swift */,
 				CE48B0DB240A697200CA0463 /* ListRowPostView.swift */,
 				CE943CD0240CF61F006486E3 /* ListRowResponseView.swift */,
 				CE8E4220240E947500EC2F77 /* AddPostView.swift */,
 				CE8E4222240EB59D00EC2F77 /* AddResponseView.swift */,
+				B736B63B24127F80009DE689 /* PostView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -398,13 +398,13 @@
 				B7A7B1A3240FEA5C00A7CA6B /* JsonDATA.swift in Sources */,
 				B7A7B1A1240FE9FC00A7CA6B /* Place.swift in Sources */,
 				CE8E4223240EB59D00EC2F77 /* AddResponseView.swift in Sources */,
-				B7A7B19C240FBC1E00A7CA6B /* PostView.swift in Sources */,
 				CEC53953240D517200074B02 /* ListPlace.swift in Sources */,
 				B7A7B1AD240FF35A00A7CA6B /* ListTypeResponse.swift in Sources */,
 				CEB0AE9224056D73008E7720 /* ContentView.swift in Sources */,
 				CEB0AE8D24056D73008E7720 /* SceneDelegate.swift in Sources */,
 				CE8E4221240E947500EC2F77 /* AddPostView.swift in Sources */,
 				CEEE69CF24094FC8008D5110 /* CategoryProtocol.swift in Sources */,
+				B736B63C24127F80009DE689 /* PostView.swift in Sources */,
 				B7A7B1AB240FF2A200A7CA6B /* TypeResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
