@@ -19,5 +19,4 @@ class ListPlace : Identifiable{
         } catch {print(error)
             fatalError("cant decode")}
     }
-    
 }

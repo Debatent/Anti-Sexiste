@@ -14,11 +14,11 @@ struct PostView: View {
     @ObservedObject var post : Post
     
     var listTypeResponse : ListTypeResponse = ListTypeResponse()
-    @State var currentTypeResponse : String = "Tout"
+    
     
     @State var filteredListTypeResponse: [Response]
     
-    
+    @State var currentTypeResponse : String = "Tout"
     var body: some View {
         
         NavigationView{
@@ -83,7 +83,7 @@ struct PostView: View {
                                     radius: 3,
                                     x: 3,
                                     y: 3).sheet(isPresented: $showingAddResponseView) {
-                                        AddResponseView(showingAddPostView : self.$showingAddResponseView, post : self.post)
+                                        AddResponseView(showingAddResponseView : self.$showingAddResponseView, post : self.post, listTypeResponse: self.listTypeResponse)
                         }
                     }
                 }

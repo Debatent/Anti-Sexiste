@@ -8,8 +8,6 @@
 
 import SwiftUI
 import Combine
-import UIKit
-import PhotosUI
 
 
 struct ContentView: View {
@@ -86,7 +84,19 @@ struct ContentView: View {
                         }
                     }
                 }
-            }
+            }.navigationBarItems(trailing:
+                HStack {
+                    NavigationLink(destination: SignInView()) {
+                        Image("icons8-account-50")
+                            .renderingMode(Image.TemplateRenderingMode?.init(Image.TemplateRenderingMode.original))
+                        
+                    }
+                    NavigationLink(destination: SignUpView()) {
+                        Image("icons8-google-forms-50")
+                            .renderingMode(Image.TemplateRenderingMode?.init(Image.TemplateRenderingMode.original))
+                    }
+                }
+            )
             
             
         }

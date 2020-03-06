@@ -20,13 +20,13 @@
             "typeResponse" : "Sérieux"
         },
             {
-                "idResponse" : 0,
+                "idResponse" : 3,
                 "message" : "response 1 du post 1",
                 "date" : "Saturday, November 25, 2017",
                 "typeResponse" : "Humour"
             },
                 {
-                "idResponse" : 1,
+                "idResponse" : 4,
                 "message" : "response 2 du post 1",
                 "date" : "Saturday, November 25, 2017",
                 "typeResponse" : "Colérique"
