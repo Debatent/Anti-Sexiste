@@ -13,10 +13,6 @@ class ListPlace : Identifiable{
     var places : [Place]
     
     init(){
-        let data : Data = loadDATA(file: "place")
-        do {
-            self.places = try JSONDecoder().decode([Place].self,from:data)
-        } catch {print(error)
-            fatalError("cant decode")}
+        self.places = getPlaces()
     }
 }

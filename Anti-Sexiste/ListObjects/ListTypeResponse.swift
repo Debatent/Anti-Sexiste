@@ -13,11 +13,6 @@ class ListTypeResponse : Identifiable{
     var types : [TypeResponse]
     
     init(){
-        let data : Data = loadDATA(file: "typeResponse")
-        do {
-            self.types = try JSONDecoder().decode([TypeResponse].self,from:data)
-        } catch {print(error)
-            fatalError("cant decode")}
+        self.types = getTypeResponse()
     }
-    
 }

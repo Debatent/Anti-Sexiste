@@ -15,12 +15,9 @@ class ListPost : ObservableObject,Identifiable{
     @Published var listPost : [Post]
     
     init(){
-        let data : Data = loadDATA(file: "data")
-        do {
-            self.listPost = try JSONDecoder().decode([Post].self,from:data)
-        } catch {print(error)
-            fatalError("cant decode")}
-    }
+        self.listPost = getListPost()
+            
+        }
     
     init(listPost: [Post]) {
         self.listPost = listPost
