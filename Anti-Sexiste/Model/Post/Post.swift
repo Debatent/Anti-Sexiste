@@ -53,7 +53,14 @@ class Post :Identifiable,Codable, ObservableObject{
 
     
     func encode(to encoder: Encoder) throws {
-        
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(placePost, forKey: .placePost)
+        try container.encodeIfPresent(idPost, forKey: .idPost)
+        try container.encode(message, forKey: .message)
+        try container.encode(title, forKey: .title)
+        try container.encode(date, forKey: .date)
+        try container.encode(listResponse, forKey: .listResponse)
+        try container.encodeIfPresent(user, forKey: .user)
     }
     
     init(placePost : String,idPost : Int?,listResponse : [Response], message : String, title : String, date : String, user: User?){

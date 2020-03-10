@@ -10,6 +10,8 @@
 		B736B63C24127F80009DE689 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B736B63B24127F80009DE689 /* PostView.swift */; };
 		B736B63E2412A297009DE689 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B736B63D2412A297009DE689 /* SignUpView.swift */; };
 		B736B6402412A2C3009DE689 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B736B63F2412A2C3009DE689 /* SignInView.swift */; };
+		B77D17EA2417D8C40079244A /* user.json in Resources */ = {isa = PBXBuildFile; fileRef = B77D17E92417D8C40079244A /* user.json */; };
+		B77D17ED2417E70D0079244A /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77D17EC2417E70D0079244A /* UserSession.swift */; };
 		B7A7B1A1240FE9FC00A7CA6B /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A7B1A0240FE9FC00A7CA6B /* Place.swift */; };
 		B7A7B1A3240FEA5C00A7CA6B /* JsonDATA.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A7B1A2240FEA5C00A7CA6B /* JsonDATA.swift */; };
 		B7A7B1AB240FF2A200A7CA6B /* TypeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A7B1AA240FF2A200A7CA6B /* TypeResponse.swift */; };
@@ -61,6 +63,8 @@
 		B736B63B24127F80009DE689 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		B736B63D2412A297009DE689 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		B736B63F2412A2C3009DE689 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		B77D17E92417D8C40079244A /* user.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = user.json; sourceTree = "<group>"; };
+		B77D17EC2417E70D0079244A /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		B7A7B1A0240FE9FC00A7CA6B /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		B7A7B1A2240FEA5C00A7CA6B /* JsonDATA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonDATA.swift; sourceTree = "<group>"; };
 		B7A7B1AA240FF2A200A7CA6B /* TypeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeResponse.swift; sourceTree = "<group>"; };
@@ -122,6 +126,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B77D17EB2417E6FE0079244A /* User */ = {
+			isa = PBXGroup;
+			children = (
+				CE89074E2416975200ABDE4C /* User.swift */,
+				B77D17EC2417E70D0079244A /* UserSession.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		B77D17EE2417F8730079244A /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				CE8E4222240EB59D00EC2F77 /* AddResponseView.swift */,
+				CE943CD0240CF61F006486E3 /* ListRowResponseView.swift */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
+		B77D17EF2417F8840079244A /* Posts */ = {
+			isa = PBXGroup;
+			children = (
+				CE48B0DB240A697200CA0463 /* ListRowPostView.swift */,
+				CE8E4220240E947500EC2F77 /* AddPostView.swift */,
+				B736B63B24127F80009DE689 /* PostView.swift */,
+			);
+			path = Posts;
+			sourceTree = "<group>";
+		};
+		B77D17F02417F8900079244A /* User */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		B7A7B199240FBB1D00A7CA6B /* Post */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,11 +191,9 @@
 		CE48B0DA240A695200CA0463 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CE48B0DB240A697200CA0463 /* ListRowPostView.swift */,
-				CE943CD0240CF61F006486E3 /* ListRowResponseView.swift */,
-				CE8E4220240E947500EC2F77 /* AddPostView.swift */,
-				CE8E4222240EB59D00EC2F77 /* AddResponseView.swift */,
-				B736B63B24127F80009DE689 /* PostView.swift */,
+				B77D17F02417F8900079244A /* User */,
+				B77D17EF2417F8840079244A /* Posts */,
+				B77D17EE2417F8730079244A /* Responses */,
 				B736B63D2412A297009DE689 /* SignUpView.swift */,
 				B736B63F2412A2C3009DE689 /* SignInView.swift */,
 			);
@@ -235,6 +272,7 @@
 				CEC53950240D512100074B02 /* place.json */,
 				B7A7B1A2240FEA5C00A7CA6B /* JsonDATA.swift */,
 				B7A7B1AE240FF39C00A7CA6B /* typeResponse.json */,
+				B77D17E92417D8C40079244A /* user.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -242,11 +280,11 @@
 		CEEE69C124094CBA008D5110 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B77D17EB2417E6FE0079244A /* User */,
 				B7A7B19F240FE9EA00A7CA6B /* Category */,
 				B7A7B19A240FBB3000A7CA6B /* Response */,
 				B7A7B199240FBB1D00A7CA6B /* Post */,
 				CEEE69CE24094FC8008D5110 /* CategoryProtocol.swift */,
-				CE89074E2416975200ABDE4C /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -368,6 +406,7 @@
 				CEB0AE9A24056D75008E7720 /* LaunchScreen.storyboard in Resources */,
 				CEC53951240D512100074B02 /* place.json in Resources */,
 				CEB0AE9724056D74008E7720 /* Preview Assets.xcassets in Resources */,
+				B77D17EA2417D8C40079244A /* user.json in Resources */,
 				CEB0AE9424056D74008E7720 /* Assets.xcassets in Resources */,
 				B7A7B1AF240FF39C00A7CA6B /* typeResponse.json in Resources */,
 				CEE1E16B240A5BB200046342 /* data.json in Resources */,
@@ -410,6 +449,7 @@
 				CE8E4223240EB59D00EC2F77 /* AddResponseView.swift in Sources */,
 				CEC53953240D517200074B02 /* ListPlace.swift in Sources */,
 				B7A7B1AD240FF35A00A7CA6B /* ListTypeResponse.swift in Sources */,
+				B77D17ED2417E70D0079244A /* UserSession.swift in Sources */,
 				CEB0AE9224056D73008E7720 /* ContentView.swift in Sources */,
 				CEB0AE8D24056D73008E7720 /* SceneDelegate.swift in Sources */,
 				CE8E4221240E947500EC2F77 /* AddPostView.swift in Sources */,

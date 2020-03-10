@@ -45,7 +45,12 @@ class Response: Identifiable, Codable, ObservableObject{
 
     
     func encode(to encoder: Encoder) throws {
-        
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(idResponse, forKey: .idResponse)
+        try container.encode(message, forKey: .message)
+        try container.encode(date, forKey: .date)
+        try container.encode(typeResponse, forKey: .typeResponse)
+        try container.encodeIfPresent(user, forKey: .user)
     }
     
     

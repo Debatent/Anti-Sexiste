@@ -11,6 +11,7 @@ import Combine
 
 struct ListRowPostView: View {
     @ObservedObject var post : Post
+    @EnvironmentObject var userSession : UserSession
 
     var body: some View {
         

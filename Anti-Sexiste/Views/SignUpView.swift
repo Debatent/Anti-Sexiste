@@ -9,8 +9,47 @@
 import SwiftUI
 
 struct SignUpView: View {
+    @EnvironmentObject var userSession : UserSession
+    @State var user : User = User()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView{
+            if (userSession.isConnected){
+                Text("Vous êtes déjà inscrit !")
+            }
+            else {
+                Form{
+                    Text("Inscrivez vous graduitement pour avoir accès à plus de fonctionalitées !")
+                        .font(.headline)
+                        .fontWeight(.thin)
+                        .multilineTextAlignment(.center)
+                        .padding(.all)
+                    VStack{
+                        Text("Email :")
+                        TextField("email", text: $user.email)
+                        Text("Password :")
+                        SecureField("password", text: $user.password)
+                        
+                    }
+                    .padding(.all)
+                    Button(action:{
+                        self.userSession.setUser(user: self.user)
+                        saveUser(user : self.user)
+                        self.user = User()
+                        
+                    }) {
+                        Text("S'incrire")
+                    }.frame(minWidth: 0, maxWidth: .infinity)
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.blue), Color.blue]), startPoint: .leading, endPoint: .trailing))
+                        .cornerRadius(40)
+                        .padding(.horizontal, 20)
+                }
+            }
+        
+        }
+        
     }
 }
 

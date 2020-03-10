@@ -16,7 +16,6 @@ class User: Codable, ObservableObject{
     enum CodingKeys: String, CodingKey {
         case email
         case password
-        
     }
     
     required init(from decoder: Decoder) throws {
@@ -32,7 +31,9 @@ class User: Codable, ObservableObject{
 
     
     func encode(to encoder: Encoder) throws {
-        
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(email, forKey: .email)
+        try container.encode(password, forKey: .password)
     }
     
     init(email : String, password : String){

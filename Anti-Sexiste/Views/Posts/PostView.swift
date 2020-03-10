@@ -10,6 +10,7 @@ import SwiftUI
 import Combine
 
 struct PostView: View {
+    @EnvironmentObject var userSession : UserSession
     @State var showingAddResponseView = false
     @ObservedObject var post : Post
     

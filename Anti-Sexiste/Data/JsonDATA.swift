@@ -30,6 +30,8 @@ private func decodeJsonData <T>(returnType: T.Type ,data: Data) -> T where T:Dec
         fatalError("cant decode")}
 }
 
+
+
 func getListPost() -> [Post]{
     let data : Data = loadDATA(file: "data")
     return decodeJsonData(returnType: [Post].self, data: data)
@@ -44,3 +46,25 @@ func getTypeResponse()-> [TypeResponse]{
     let data : Data = loadDATA(file: "typeResponse")
     return decodeJsonData(returnType: [TypeResponse].self, data: data)
 }
+
+
+func savePost(post : Post){
+    guard let file = Bundle.main.url(forResource: "data", withExtension: "json")
+    else {fatalError("Cant load file")}
+    do {
+         let data = try JSONEncoder().encode(post);
+        try data.write(to : file)
+    } catch {print(error)
+        fatalError("cant encode")}
+}
+
+func saveUser(user : User){
+    guard let file = Bundle.main.url(forResource: "user", withExtension: "json")
+    else {fatalError("Cant load file")}
+    do {
+         let data = try JSONEncoder().encode(user);
+        try data.write(to : file)
+    } catch {print(error)
+        fatalError("cant encode")}
+}
+

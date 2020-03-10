@@ -11,7 +11,7 @@ import Combine
 
 
 struct ContentView: View {
-    
+    @EnvironmentObject var userSession : UserSession
     @ObservedObject var listPost : ListPost = ListPost()
     
     @State var showingAddPostView = false
