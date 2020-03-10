@@ -9,7 +9,7 @@
 import Foundation
 
 
-class Response: Identifiable, Codable{
+class Response: Identifiable, Codable, ObservableObject{
     
     var idResponse: Int?
     
@@ -19,17 +19,44 @@ class Response: Identifiable, Codable{
     
     var typeResponse: String
     
-    
+    @Published var user : User?
 
     
+    enum CodingKeys: String, CodingKey {
+        case idResponse
+        case message
+        case date
+        case typeResponse
+        case user
+    }
     
-    init(idResponse : Int?, message : String, date : String, typeResponse : String){
+    required init(from decoder: Decoder) throws {
+            do {
+                let values = try decoder.container(keyedBy: CodingKeys.self)
+                self.idResponse = try values.decodeIfPresent(Int.self, forKey: .idResponse)
+                self.message = try values.decode(String.self, forKey: .message)
+                self.date = try values.decode(String.self, forKey: .date)
+                self.typeResponse = try values.decode(String.self, forKey: .typeResponse)
+                self.user = try values.decodeIfPresent(User.self, forKey: .user)
+
+            } catch {print(error)
+                fatalError("cant decode")}
+        }
+
+    
+    func encode(to encoder: Encoder) throws {
+        
+    }
+    
+    
+    init(idResponse : Int?, message : String, date : String, typeResponse : String, user : User?){
         self.idResponse = idResponse
         self.message = message
         self.date = date
         self.typeResponse = typeResponse
+        self.user = user
     }
     convenience init() {
-        self.init(idResponse : nil, message : "", date : "", typeResponse : "")
+        self.init(idResponse : nil, message : "", date : "", typeResponse : "", user : nil)
     }
 }

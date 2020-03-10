@@ -23,6 +23,8 @@ class Post :Identifiable,Codable, ObservableObject{
     var title: String
     
     var date: String
+    
+    @Published var user : User?
 
     enum CodingKeys: String, CodingKey {
         case placePost
@@ -31,18 +33,20 @@ class Post :Identifiable,Codable, ObservableObject{
         case message
         case title
         case date
+        case user
     }
     
     required init(from decoder: Decoder) throws {
             do {
                 let values = try decoder.container(keyedBy: CodingKeys.self)
                 self.placePost = try values.decode(String.self, forKey: .placePost)
-                self.idPost = try values.decode(Int.self, forKey: .idPost)
+                self.idPost = try values.decodeIfPresent(Int.self, forKey: .idPost)
                 self.message = try values.decode(String.self, forKey: .message)
                 self.title = try values.decode(String.self, forKey: .title)
                 self.date = try values.decode(String.self, forKey: .date)
                 self.listResponse = try values.decode([Response].self, forKey: .listResponse)
-                print(self.title.description)
+                self.user = try values.decodeIfPresent(User.self, forKey: .user)
+
             } catch {print(error)
                 fatalError("cant decode")}
         }
@@ -52,7 +56,7 @@ class Post :Identifiable,Codable, ObservableObject{
         
     }
     
-    init(placePost : String,idPost : Int?,listResponse : [Response], message : String, title : String, date : String){
+    init(placePost : String,idPost : Int?,listResponse : [Response], message : String, title : String, date : String, user: User?){
         self.placePost = placePost
         self.idPost = idPost
         self.listResponse = listResponse
@@ -62,7 +66,7 @@ class Post :Identifiable,Codable, ObservableObject{
     }
     
     convenience init() {
-        self.init(placePost : "",idPost : nil, listResponse : [], message : "", title : "", date : "")
+        self.init(placePost : "",idPost : nil, listResponse : [], message : "", title : "", date : "", user : nil)
     }
     
 }

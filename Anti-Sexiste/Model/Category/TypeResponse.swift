@@ -14,4 +14,8 @@ class TypeResponse:Identifiable,Codable{
     init(typeResponse : String){
         self.typeResponse = typeResponse
     }
+    
+    convenience init(){
+        self.init(typeResponse : "")
+    }
 }
