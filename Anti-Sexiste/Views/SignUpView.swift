@@ -13,13 +13,13 @@ struct SignUpView: View {
     @State var user : User = User()
     
     var body: some View {
-        NavigationView{
+        VStack{
             if (userSession.isConnected){
-                Text("Vous êtes déjà inscrit !")
+                Text("Vous êtes inscrit.")
             }
             else {
                 Form{
-                    Text("Inscrivez vous graduitement pour avoir accès à plus de fonctionalitées !")
+                    Text("Inscrivez vous gratuitement pour avoir accès à plus de fonctionalitées !")
                         .font(.headline)
                         .fontWeight(.thin)
                         .multilineTextAlignment(.center)

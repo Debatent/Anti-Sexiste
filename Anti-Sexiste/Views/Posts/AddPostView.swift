@@ -42,7 +42,9 @@ struct AddPostView: View {
                     let formatter1 = DateFormatter()
                     formatter1.dateStyle = .long
                     self.post.date = formatter1.string(from: today)
-                    print(self.post)
+                    if (self.userSession.isConnected){
+                        self.post.user = self.userSession.user!
+                    }
                     self.listPost.addPost(post: self.post)
                     savePost(post: self.post)
                     self.post = Post()

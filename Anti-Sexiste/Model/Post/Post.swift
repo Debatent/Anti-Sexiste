@@ -25,6 +25,8 @@ class Post :Identifiable,Codable, ObservableObject{
     var date: String
     
     @Published var user : User?
+    
+    @Published var mark : Int
 
     enum CodingKeys: String, CodingKey {
         case placePost
@@ -34,6 +36,7 @@ class Post :Identifiable,Codable, ObservableObject{
         case title
         case date
         case user
+        case mark
     }
     
     required init(from decoder: Decoder) throws {
@@ -46,6 +49,8 @@ class Post :Identifiable,Codable, ObservableObject{
                 self.date = try values.decode(String.self, forKey: .date)
                 self.listResponse = try values.decode([Response].self, forKey: .listResponse)
                 self.user = try values.decodeIfPresent(User.self, forKey: .user)
+                self.mark = try values.decode(Int.self, forKey: .mark)
+
 
             } catch {print(error)
                 fatalError("cant decode")}
@@ -61,6 +66,7 @@ class Post :Identifiable,Codable, ObservableObject{
         try container.encode(date, forKey: .date)
         try container.encode(listResponse, forKey: .listResponse)
         try container.encodeIfPresent(user, forKey: .user)
+        try container.encode(mark, forKey: .mark)
     }
     
     init(placePost : String,idPost : Int?,listResponse : [Response], message : String, title : String, date : String, user: User?){
@@ -70,10 +76,19 @@ class Post :Identifiable,Codable, ObservableObject{
         self.message = message
         self.title = title
         self.date = date
+        self.mark = 0
     }
     
     convenience init() {
         self.init(placePost : "",idPost : nil, listResponse : [], message : "", title : "", date : "", user : nil)
+    }
+    
+    //// POur le moment, ne fonctionnera pas sur un post qui vient d'être crée (pas d'ID)
+    func increment(user : User){
+        if (!user.postsMarked.contains(self.idPost!)){
+            user.postsMarked.append(self.idPost!)
+            self.mark += 1
+        }
     }
     
 }

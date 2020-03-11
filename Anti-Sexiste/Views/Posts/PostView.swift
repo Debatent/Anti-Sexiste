@@ -25,12 +25,6 @@ struct PostView: View {
         NavigationView{
             ZStack{
                 VStack{
-                    Text(self.post.title)
-                        .font(.title)
-                        .fontWeight(.thin)
-                        .foregroundColor(Color.gray)
-                        .multilineTextAlignment(.leading)
-                        .padding([.top, .leading, .trailing])
                     Text(self.post.message)
                         .multilineTextAlignment(.center)
                         .lineLimit(100)
@@ -90,7 +84,33 @@ struct PostView: View {
                 }
                 
             }
-        }
+        }.navigationBarTitle(post.title).navigationBarItems(trailing:
+            HStack{
+                if (userSession.isConnected){
+                    Button(action: {
+                        self.post.increment(user: self.userSession.user!)
+                    }) {
+                        Image(systemName: "plus")
+                    }
+                }
+                VStack{
+                    Image(systemName: "flame").foregroundColor(.red)
+                    Text(String(self.post.mark))
+                }
+                if (userSession.isConnected){
+                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                        Image(systemName: "minus")
+                    }
+                    if (userSession.user! === self.post.user){
+                        Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                            Image(systemName: "trash")
+                        }
+                        
+                    }
+                }
+                
+            }
+        )
         
     }
 }

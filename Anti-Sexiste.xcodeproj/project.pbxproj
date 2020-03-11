@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B70B71622418E36200CA87F6 /* ProfilView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70B71612418E36200CA87F6 /* ProfilView.swift */; };
 		B736B63C24127F80009DE689 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B736B63B24127F80009DE689 /* PostView.swift */; };
 		B736B63E2412A297009DE689 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B736B63D2412A297009DE689 /* SignUpView.swift */; };
 		B736B6402412A2C3009DE689 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B736B63F2412A2C3009DE689 /* SignInView.swift */; };
@@ -60,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B70B71612418E36200CA87F6 /* ProfilView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilView.swift; sourceTree = "<group>"; };
 		B736B63B24127F80009DE689 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		B736B63D2412A297009DE689 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		B736B63F2412A2C3009DE689 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 		B77D17F02417F8900079244A /* User */ = {
 			isa = PBXGroup;
 			children = (
+				B70B71612418E36200CA87F6 /* ProfilView.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -445,6 +448,7 @@
 				CE943CD1240CF61F006486E3 /* ListRowResponseView.swift in Sources */,
 				B7A7B1A3240FEA5C00A7CA6B /* JsonDATA.swift in Sources */,
 				B736B63E2412A297009DE689 /* SignUpView.swift in Sources */,
+				B70B71622418E36200CA87F6 /* ProfilView.swift in Sources */,
 				B7A7B1A1240FE9FC00A7CA6B /* Place.swift in Sources */,
 				CE8E4223240EB59D00EC2F77 /* AddResponseView.swift in Sources */,
 				CEC53953240D517200074B02 /* ListPlace.swift in Sources */,

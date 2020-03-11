@@ -11,11 +11,13 @@ import Foundation
 class User: Codable, ObservableObject{
     @Published var email : String
     @Published var password : String
+    @Published var postsMarked : [Int]
     
     
     enum CodingKeys: String, CodingKey {
         case email
         case password
+        case postsMarked
     }
     
     required init(from decoder: Decoder) throws {
@@ -23,7 +25,7 @@ class User: Codable, ObservableObject{
                 let values = try decoder.container(keyedBy: CodingKeys.self)
                 self.email = try values.decode(String.self, forKey: .email)
                 self.password = try values.decode(String.self, forKey: .password)
-                
+                self.postsMarked = try values.decode([Int].self, forKey: .postsMarked)
 
             } catch {print(error)
                 fatalError("cant decode")}
@@ -39,6 +41,7 @@ class User: Codable, ObservableObject{
     init(email : String, password : String){
         self.email = email
         self.password = password
+        self.postsMarked = []
     }
     convenience init(){
         self.init(email : "", password : "")

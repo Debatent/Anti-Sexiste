@@ -12,24 +12,33 @@ import Combine
 struct ListRowPostView: View {
     @ObservedObject var post : Post
     @EnvironmentObject var userSession : UserSession
-
+    
     var body: some View {
         
-        VStack{
-            Text(post.title)
-                .font(.title)
-                .fontWeight(.thin)
-                .foregroundColor(Color.gray)
-                .multilineTextAlignment(.center)
-                .padding([.top, .leading, .trailing])
-            Text(post.message)
-                .multilineTextAlignment(.center)
-                .lineLimit(2)
-                .padding(.all)
-            Text(post.date)
-                .font(.caption)
-                .fontWeight(.ultraLight)
-                .multilineTextAlignment(.trailing)
+        HStack{
+            VStack(alignment: .leading, spacing: 20){
+                Text(post.title)
+                    .font(.title)
+                    .fontWeight(.thin)
+                    .foregroundColor(Color.gray)
+                    .multilineTextAlignment(.center)
+                    .padding([.top, .leading, .trailing])
+                Text(post.message)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(2)
+                    .padding(.all)
+                Text(post.date)
+                    .font(.caption)
+                    .fontWeight(.ultraLight)
+                    .multilineTextAlignment(.trailing)
+                
+            }
+            Spacer()
+            VStack{
+                Image(systemName: "flame").foregroundColor(.red)
+                Text(String(post.mark))
+            }
+            
         }
         
         

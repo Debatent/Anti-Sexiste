@@ -67,11 +67,12 @@ struct ContentView: View {
                         Button(action: {
                             self.showingAddPostView.toggle()
                         }, label: {
-                            Image(systemName: "pencil.tip")
-                                .font(.system(.largeTitle))
-                                .frame(width: 57, height: 50)
+                            Image(systemName: "text.bubble").resizable()
+                                .font(.system(.caption))
+                                .frame(width: 30, height: 30)
                                 .foregroundColor(Color.white)
-                                .padding(.bottom, 7)
+                                .padding()
+                            
                         })
                             .background(Color.blue)
                             .cornerRadius(38.5)
