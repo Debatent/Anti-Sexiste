@@ -28,6 +28,12 @@ class ListPost : ObservableObject,Identifiable{
         self.listPost.append(post)
     }
     
+    func deletePost(post : Post){
+        if let index = self.listPost.firstIndex(where: {$0 === post}) {
+          self.listPost.remove(at: index)
+        }
+    }
+    
     func filterList(place : String)-> [Post]{
         if (place != "Tout"){
             return self.listPost.filter { $0.placePost == place }

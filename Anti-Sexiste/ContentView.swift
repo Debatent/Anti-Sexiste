@@ -13,7 +13,8 @@ import Combine
 struct ContentView: View {
     @EnvironmentObject var userSession : UserSession
     @ObservedObject var listPost : ListPost = ListPost()
-    
+    @State private var showingAlert = false
+
     @State var showingAddPostView = false
     
     var listPlace : ListPlace = ListPlace()
@@ -53,9 +54,8 @@ struct ContentView: View {
                     
                     List{
                         ForEach(self.filteredListPost){ post in
-                            NavigationLink(destination: PostView(post: post, filteredListTypeResponse : post.listResponse)){
-                                ListRowPostView(post:post)
-                                
+                            NavigationLink(destination: PostView(post: post, listPost: self.listPost, filteredListTypeResponse : post.listResponse).environmentObject(self.userSession)){
+                                ListRowPostView(post:post).environmentObject(self.userSession)
                             }
                         }
                     }
@@ -81,12 +81,21 @@ struct ContentView: View {
                                     radius: 3,
                                     x: 3,
                                     y: 3).sheet(isPresented: $showingAddPostView) {
-                                        AddPostView(showingAddPostView: self.$showingAddPostView, listPlace: self.listPlace, listPost: self.listPost)
+                                        AddPostView(showingAddPostView: self.$showingAddPostView, listPlace: self.listPlace, listPost: self.listPost).environmentObject(self.userSession)
                         }
                     }
                 }
             }.navigationBarItems(trailing:
                 HStack {
+                    if (userSession.isConnected){
+                        Button(action : {
+                            self.userSession.setUser(user: nil)
+                            self.showingAlert = true
+                        }){
+                            Image("icons8-shutdown-50")
+                                .renderingMode(Image.TemplateRenderingMode?.init(Image.TemplateRenderingMode.original))
+                        }
+                    }
                     NavigationLink(destination: SignInView()) {
                         Image("icons8-account-50")
                             .renderingMode(Image.TemplateRenderingMode?.init(Image.TemplateRenderingMode.original))
@@ -96,12 +105,16 @@ struct ContentView: View {
                         Image("icons8-google-forms-50")
                             .renderingMode(Image.TemplateRenderingMode?.init(Image.TemplateRenderingMode.original))
                     }
+                    
                 }
             )
             
             
-        }
+        }.alert(isPresented: $showingAlert) {
+        Alert(title: Text("Zzziouuuuff"), message: Text("Vous avez été déconnecté !"), dismissButton: .default(Text("Super")))
+            }
     }
+    
 }
 
 

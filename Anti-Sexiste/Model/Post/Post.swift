@@ -84,11 +84,13 @@ class Post :Identifiable,Codable, ObservableObject{
     }
     
     //// POur le moment, ne fonctionnera pas sur un post qui vient d'être crée (pas d'ID)
-    func increment(user : User){
+    func increment(user : User)->Bool{
         if (!user.postsMarked.contains(self.idPost!)){
             user.postsMarked.append(self.idPost!)
             self.mark += 1
+            return true
         }
+        return false
     }
     
 }

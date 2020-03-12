@@ -22,10 +22,14 @@ class UserSession:ObservableObject{
         }
     }
     
-    func setUser(user : User){
-        if (!self.isConnected){
+    func setUser(user : User?){
+        if let user = user{
             self.isConnected = true
             self.user = user
+        }
+        else {
+            self.isConnected = false
+            self.user = nil
         }
     }
     

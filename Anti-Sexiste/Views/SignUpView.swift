@@ -11,7 +11,8 @@ import SwiftUI
 struct SignUpView: View {
     @EnvironmentObject var userSession : UserSession
     @State var user : User = User()
-    
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+
     var body: some View {
         VStack{
             if (userSession.isConnected){
@@ -36,7 +37,7 @@ struct SignUpView: View {
                         self.userSession.setUser(user: self.user)
                         saveUser(user : self.user)
                         self.user = User()
-                        
+                        self.mode.wrappedValue.dismiss()
                     }) {
                         Text("S'incrire")
                     }.frame(minWidth: 0, maxWidth: .infinity)
