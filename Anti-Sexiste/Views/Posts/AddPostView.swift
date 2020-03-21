@@ -37,13 +37,13 @@ struct AddPostView: View {
                     TextField("message", text: $post.message)
                 }
                 Button(action:{
-                    self.post.placePost = self.listPlace.places[self.selection].place
+                    self.post.location = self.listPlace.places[self.selection].place
                     let today = Date()
                     let formatter1 = DateFormatter()
                     formatter1.dateStyle = .long
-                    self.post.date = formatter1.string(from: today)
+                    self.post.createdAt = formatter1.string(from: today)
                     if (self.userSession.isConnected){
-                        self.post.user = self.userSession.user!
+                        self.post.author = self.userSession.user!.pseudo
                     }
                     self.listPost.addPost(post: self.post)
                     savePost(post: self.post)

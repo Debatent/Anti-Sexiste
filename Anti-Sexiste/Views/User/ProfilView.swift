@@ -12,7 +12,7 @@ struct ProfilView: View {
     @EnvironmentObject var userSession : UserSession
 
     var body: some View {
-        Text(userSession.user!.email)
+        Text(userSession.user!.pseudo)
     }
 }
 

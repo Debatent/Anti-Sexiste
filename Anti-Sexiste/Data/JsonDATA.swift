@@ -6,7 +6,52 @@
 //  Copyright © 2020 user165109. All rights reserved.
 //
 
+
+
+//if let url = URL(string: "http://vps799211.ovh.net/") {
+//   URLSession.shared.dataTask(with: url) { data, response, error in
+//if let data = data {
+////...
+//       }
+//   }.resume()
+//}
+
+
+
 import Foundation
+
+
+func loadPosts() -> [Post]{
+    let config = URLSessionConfiguration.default
+    let session = URLSession(configuration: config)
+    var listPost : [Post] = []
+    guard let url = URL(string: "http://vps799211.ovh.net/posts") else {fatalError("url false")}
+    let task = session.dataTask(with: url) { data, response, error in
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200...299).contains(httpResponse.statusCode) else {print(response!)
+
+            return
+        }
+        // ensure there is no error for this HTTP response
+        guard error == nil else {
+            print ("error: \(error!)")
+            return
+        }
+        
+        // ensure there is data returned from this HTTP response
+        guard let content = data else {
+            print("No data")
+            return
+        }
+        do {
+            listPost = try JSONDecoder().decode([Post].self,from: content)
+        } catch {print(error)
+            fatalError("cant decode")}
+    }.resume()
+    print(listPost)
+    return listPost
+}
+
 let server =  ProcessInfo.processInfo.environment["Server"];//get environmental variable of the server
 
 private func loadDATA(file : String, type:String = "json") -> Data {

@@ -9,13 +9,13 @@
 import Foundation
 
 class User: Codable, ObservableObject{
-    @Published var email : String
+    @Published var pseudo : String
     @Published var password : String
-    @Published var postsMarked : [Int]
+    @Published var postsMarked : [String]
     
     
     enum CodingKeys: String, CodingKey {
-        case email
+        case pseudo
         case password
         case postsMarked
     }
@@ -23,9 +23,9 @@ class User: Codable, ObservableObject{
     required init(from decoder: Decoder) throws {
             do {
                 let values = try decoder.container(keyedBy: CodingKeys.self)
-                self.email = try values.decode(String.self, forKey: .email)
+                self.pseudo = try values.decode(String.self, forKey: .pseudo)
                 self.password = try values.decode(String.self, forKey: .password)
-                self.postsMarked = try values.decode([Int].self, forKey: .postsMarked)
+                self.postsMarked = try values.decode([String].self, forKey: .postsMarked)
 
             } catch {print(error)
                 fatalError("cant decode")}
@@ -34,16 +34,16 @@ class User: Codable, ObservableObject{
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(email, forKey: .email)
+        try container.encode(pseudo, forKey: .pseudo)
         try container.encode(password, forKey: .password)
     }
     
-    init(email : String, password : String){
-        self.email = email
+    init(pseudo : String, password : String){
+        self.pseudo = pseudo
         self.password = password
         self.postsMarked = []
     }
     convenience init(){
-        self.init(email : "", password : "")
+        self.init(pseudo : "", password : "")
     }
 }

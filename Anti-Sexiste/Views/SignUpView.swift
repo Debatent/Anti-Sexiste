@@ -27,7 +27,7 @@ struct SignUpView: View {
                         .padding(.all)
                     VStack{
                         Text("Email :")
-                        TextField("email", text: $user.email)
+                        TextField("email", text: $user.pseudo)
                         Text("Password :")
                         SecureField("password", text: $user.password)
                         

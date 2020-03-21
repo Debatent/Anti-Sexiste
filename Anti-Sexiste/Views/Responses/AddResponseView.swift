@@ -42,8 +42,12 @@ struct AddResponseView: View {
                     let formatter1 = DateFormatter()
                     formatter1.dateStyle = .long
                     self.response.date = formatter1.string(from: today)
+                    if self.post.listResponse != nil{
+                        self.post.listResponse!.append(self.response)}else{
+                        self.post.listResponse = [self.response]
+                    }
                     
-                    self.post.listResponse.append(self.response)
+                    
                     savePost(post: self.post)
                     self.response = Response()
                     self.showingAddResponseView = false

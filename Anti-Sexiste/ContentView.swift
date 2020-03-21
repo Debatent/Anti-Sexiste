@@ -13,6 +13,9 @@ import Combine
 struct ContentView: View {
     @EnvironmentObject var userSession : UserSession
     @ObservedObject var listPost : ListPost = ListPost()
+    
+    
+    
     @State private var showingAlert = false
 
     @State var showingAddPostView = false
@@ -54,9 +57,10 @@ struct ContentView: View {
                     
                     List{
                         ForEach(self.filteredListPost){ post in
-                            NavigationLink(destination: PostView(post: post, listPost: self.listPost, filteredListTypeResponse : post.listResponse).environmentObject(self.userSession)){
-                                ListRowPostView(post:post).environmentObject(self.userSession)
-                            }
+//                            NavigationLink(destination: PostView(post: post, listPost: self.listPost, filteredListTypeResponse : post.listResponse).environmentObject(self.userSession)){
+//                                ListRowPostView(post:post).environmentObject(self.userSession)
+//                            }
+                            ListRowPostView(post:post).environmentObject(self.userSession)
                         }
                     }
                 }

@@ -27,7 +27,7 @@ struct ListRowPostView: View {
                     .multilineTextAlignment(.center)
                     .lineLimit(2)
                     .padding(.all)
-                Text(post.date)
+                Text(post.createdAt)
                     .font(.caption)
                     .fontWeight(.ultraLight)
                     .multilineTextAlignment(.trailing)
@@ -36,7 +36,7 @@ struct ListRowPostView: View {
             Spacer()
             VStack{
                 Image(systemName: "flame").foregroundColor(.red)
-                Text(String(post.mark))
+                Text(String(post.reaction))
             }
             
         }
