@@ -61,11 +61,10 @@ struct ContentView: View {
                     
                     List{
                         ForEach(filterList(listPost: self.listPost.listPost, place: self.currentPlace)){ post in
-//                            NavigationLink(destination: PostView(post: post, listPost: self.listPost, filteredListTypeResponse : post.listResponse).environmentObject(self.userSession)){
-//                                ListRowPostView(post:post).environmentObject(self.userSession)
-//                            }
+                            NavigationLink(destination: PostView(post: Post(id: post._id!), listPost: self.listPost).environmentObject(self.userSession)){
+                                ListRowPostView(post:post).environmentObject(self.userSession)
+                            }
                             
-                            ListRowPostView(post:post).environmentObject(self.userSession)
                         }
                     }
                 }

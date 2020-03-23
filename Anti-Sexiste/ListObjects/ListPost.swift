@@ -82,7 +82,6 @@ func filterList(listPost : [Post],place : String)-> [Post]{
         return listPost.filter { $0.location == place }
     }
     else{
-        print("coucou")
         return listPost
     }
 }

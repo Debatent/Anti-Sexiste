@@ -37,11 +37,11 @@ struct AddResponseView: View {
                     TextField("message", text: $response.message)
                 }
                 Button(action:{
-                    self.response.typeResponse = self.listTypeResponse.types[self.selection].typeResponse
+                    self.response.type = self.listTypeResponse.types[self.selection].typeResponse
                     let today = Date()
                     let formatter1 = DateFormatter()
                     formatter1.dateStyle = .long
-                    self.response.date = formatter1.string(from: today)
+                    self.response.createdAt = formatter1.string(from: today)
                     if self.post.listResponse != nil{
                         self.post.listResponse!.append(self.response)}else{
                         self.post.listResponse = [self.response]

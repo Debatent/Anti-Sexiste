@@ -34,7 +34,7 @@ class Post :Identifiable,Codable, ObservableObject{
     enum CodingKeys: String, CodingKey {
         case location
         case _id
-        case listResponse
+        case listResponse = "comments"
         case message
         case title
         case createdAt
@@ -73,6 +73,60 @@ class Post :Identifiable,Codable, ObservableObject{
         try container.encode(report, forKey: Post.CodingKeys.report)
     }
     
+    
+    init(id : String){
+        guard let url = URL(string: "http://vps799211.ovh.net/posts/"+id) else {fatalError("url false")}
+        var request = URLRequest(url : url)
+        request.httpMethod = "GET"
+        self.location = ""
+        self._id = ""
+        self.message = ""
+        self.title = ""
+        self.createdAt = ""
+        self.listResponse = []
+        self.author = nil
+        self.reaction = 0
+        self.report = 0
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200...299).contains(httpResponse.statusCode) else {print(response!)
+
+                return
+            }
+            // ensure there is no error for this HTTP response
+            guard error == nil else {
+                print ("error: \(error!)")
+                return
+            }
+            
+            // ensure there is data returned from this HTTP response
+            guard let content = data else {
+                print("No data")
+                return
+            }
+            
+            DispatchQueue.main.async {
+                do {
+                    let post : Post = try JSONDecoder().decode(Post.self, from: content)
+                    self.location = post.location
+                    self._id = post._id
+                    self.message = post.message
+                    self.title = post.title
+                    self.createdAt = post.createdAt
+                    self.listResponse = post.listResponse
+                    self.author = post.author
+                    self.reaction = post.reaction
+                    self.report = post.report
+                } catch {print(error)
+                    fatalError("cant decode")}
+            }
+            
+            
+            
+        }.resume()
+        
+    }
+    
     init(placePost : String,idPost : String?,listResponse : [Response]?, message : String, title : String, date : String, user: String?){
         self.location = placePost
         self._id = idPost
@@ -85,7 +139,7 @@ class Post :Identifiable,Codable, ObservableObject{
     }
     
     convenience init() {
-        self.init(placePost : "",idPost : nil, listResponse : [], message : "eefezeffezzfefze", title : "", date : "", user : nil)
+        self.init(placePost : "",idPost : nil, listResponse : [], message : "", title : "", date : "", user : nil)
     }
     
     //// POur le moment, ne fonctionnera pas sur un post qui vient d'être crée (pas d'ID)

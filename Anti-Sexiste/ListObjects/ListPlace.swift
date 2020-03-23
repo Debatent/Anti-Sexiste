@@ -16,3 +16,12 @@ class ListPlace : Identifiable{
         self.places = getPlaces()
     }
 }
+
+
+func filterResponse(listResponse : [Response], typeResponse : String)->[Response]{
+    if (typeResponse != "Tout"){
+        return  listResponse.filter { $0.type == typeResponse }
+    }
+    else{
+        return listResponse    }
+}

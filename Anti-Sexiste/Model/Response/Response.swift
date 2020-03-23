@@ -11,33 +11,33 @@ import Foundation
 
 class Response: Identifiable, Codable, ObservableObject{
     
-    var idResponse: Int?
+    var _id: String?
     
     var message: String
     
-    var date: String
+    var createdAt: String
     
-    var typeResponse: String
+    var type: String
     
-    @Published var user : User?
+    @Published var author : String?
 
     
     enum CodingKeys: String, CodingKey {
-        case idResponse
+        case _id
         case message
-        case date
-        case typeResponse
-        case user
+        case createdAt
+        case type
+        case author
     }
     
     required init(from decoder: Decoder) throws {
             do {
                 let values = try decoder.container(keyedBy: CodingKeys.self)
-                self.idResponse = try values.decodeIfPresent(Int.self, forKey: .idResponse)
+                self._id = try values.decodeIfPresent(String.self, forKey: ._id)
                 self.message = try values.decode(String.self, forKey: .message)
-                self.date = try values.decode(String.self, forKey: .date)
-                self.typeResponse = try values.decode(String.self, forKey: .typeResponse)
-                self.user = try values.decodeIfPresent(User.self, forKey: .user)
+                self.createdAt = try values.decode(String.self, forKey: .createdAt)
+                self.type = try values.decode(String.self, forKey: .type)
+                self.author = try values.decodeIfPresent(String.self, forKey: .author)
 
             } catch {print(error)
                 fatalError("cant decode")}
@@ -46,20 +46,20 @@ class Response: Identifiable, Codable, ObservableObject{
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(idResponse, forKey: .idResponse)
+        try container.encodeIfPresent(_id, forKey: ._id)
         try container.encode(message, forKey: .message)
-        try container.encode(date, forKey: .date)
-        try container.encode(typeResponse, forKey: .typeResponse)
-        try container.encodeIfPresent(user, forKey: .user)
+        try container.encode(createdAt, forKey: .createdAt)
+        try container.encode(type, forKey: .type)
+        try container.encodeIfPresent(author, forKey: .author)
     }
     
     
-    init(idResponse : Int?, message : String, date : String, typeResponse : String, user : User?){
-        self.idResponse = idResponse
+    init(idResponse : String?, message : String, date : String, typeResponse : String, user : String?){
+        self._id = idResponse
         self.message = message
-        self.date = date
-        self.typeResponse = typeResponse
-        self.user = user
+        self.createdAt = date
+        self.type = typeResponse
+        self.author = user
     }
     convenience init() {
         self.init(idResponse : nil, message : "", date : "", typeResponse : "", user : nil)
