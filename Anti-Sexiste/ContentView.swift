@@ -15,7 +15,6 @@ struct ContentView: View {
     @ObservedObject var listPost : ListPost = ListPost()
     
     
-    
     @State private var showingAlert = false
 
     @State var showingAddPostView = false
@@ -23,20 +22,25 @@ struct ContentView: View {
     var listPlace : ListPlace = ListPlace()
     @State var currentPlace : String = "Tout"
     
-    @State var filteredListPost: [Post] = ListPost().listPost
     
     
     var body: some View {
+        
         NavigationView{
             ZStack {
+                
                 VStack{
+
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
                             ForEach(self.listPlace.places) { place in
-                                Button(action: {self.currentPlace = place.place
-                                    self.filteredListPost = self.listPost.filterList(place:place.place)
+                                Button(action: {
+                                        self.currentPlace = place.place
+                                        
+                                    
                                 }) {
                                     VStack{
+                                        
                                         Image(place.icon).resizable()
                                             .frame(width: 30, height: 30)
                                         Text(place.place)
@@ -56,10 +60,11 @@ struct ContentView: View {
                     
                     
                     List{
-                        ForEach(self.filteredListPost){ post in
+                        ForEach(filterList(listPost: self.listPost.listPost, place: self.currentPlace)){ post in
 //                            NavigationLink(destination: PostView(post: post, listPost: self.listPost, filteredListTypeResponse : post.listResponse).environmentObject(self.userSession)){
 //                                ListRowPostView(post:post).environmentObject(self.userSession)
 //                            }
+                            
                             ListRowPostView(post:post).environmentObject(self.userSession)
                         }
                     }

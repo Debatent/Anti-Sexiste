@@ -14,6 +14,11 @@ import Combine
 class ListPost : ObservableObject,Identifiable{
     @Published var listPost : [Post]
     
+    
+    init(listPost: [Post]) {
+        self.listPost = listPost
+    }
+    
     init(){
         self.listPost = []
         
@@ -38,20 +43,21 @@ class ListPost : ObservableObject,Identifiable{
                 print("No data")
                 return
             }
-            do {
-                self.listPost = try JSONDecoder().decode([Post].self,from: content)
-                print(self.listPost)
-            } catch {print(error)
-                fatalError("cant decode")}
+            
+            DispatchQueue.main.async {
+                do {
+                    self.listPost = try JSONDecoder().decode([Post].self,from: content)
+
+                } catch {print(error)
+                    fatalError("cant decode")}
+            }
+            
             
             
         }.resume()
-        print(self.listPost)
         }
     
-    init(listPost: [Post]) {
-        self.listPost = listPost
-    }
+    
     
     
     func addPost(post: Post){
@@ -64,14 +70,19 @@ class ListPost : ObservableObject,Identifiable{
         }
     }
     
-    func filterList(place : String)-> [Post]{
-        if (place != "Tout"){
-            return self.listPost.filter { $0.location == place }
-        }
-        else{
-            return self.listPost
-        }
+    
+    
+    
+}
+
+
+
+func filterList(listPost : [Post],place : String)-> [Post]{
+    if (place != "Tout"){
+        return listPost.filter { $0.location == place }
     }
-    
-    
+    else{
+        print("coucou")
+        return listPost
+    }
 }
