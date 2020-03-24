@@ -38,6 +38,11 @@ struct ListRowPostView: View {
                 Image(systemName: "flame").foregroundColor(.red)
                 Text(String(post.reaction))
             }
+            VStack{
+                Image(systemName: "heart.slash")
+                    .foregroundColor(.red)
+                Text(String(post.report))
+            }
             
         }
         

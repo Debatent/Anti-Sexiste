@@ -51,9 +51,10 @@ struct PostView: View {
                                     Button(action: {
                                         self.currentTypeResponse = type.typeResponse
                                     }) {
-                                        VStack{
+                                        HStack{
                                             Text(type.typeResponse)
                                                 .font(.caption)
+                                            
                                         }
                                         .padding(.leading)
                                     }

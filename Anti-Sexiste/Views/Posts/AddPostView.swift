@@ -38,15 +38,13 @@ struct AddPostView: View {
                 }
                 Button(action:{
                     self.post.location = self.listPlace.places[self.selection].place
-                    let today = Date()
-                    let formatter1 = DateFormatter()
-                    formatter1.dateStyle = .long
-                    self.post.createdAt = formatter1.string(from: today)
                     if (self.userSession.isConnected){
                         self.post.author = self.userSession.user!.pseudo
                     }
                     self.listPost.addPost(post: self.post)
-                    savePost(post: self.post)
+                    DispatchQueue.main.async {
+                        self.post.savePost()
+                    }
                     self.post = Post()
                     self.showingAddPostView = false
                 }) {

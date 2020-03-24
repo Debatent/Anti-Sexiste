@@ -64,15 +64,7 @@ func getTypeResponse()-> [TypeResponse]{
 }
 
 
-func savePost(post : Post){
-    guard let file = Bundle.main.url(forResource: "data", withExtension: "json")
-        else {fatalError("Cant load file")}
-    do {
-        let data = try JSONEncoder().encode(post);
-        try data.write(to : file)
-    } catch {print(error)
-        fatalError("cant encode")}
-}
+
 
 func saveUser(user : User){
     guard let file = Bundle.main.url(forResource: "user", withExtension: "json")
@@ -84,39 +76,4 @@ func saveUser(user : User){
         fatalError("cant encode")}
 }
 
-func getPost(id : String) -> Post{
-    var post : Post = Post()
-    guard let url = URL(string: "http://vps799211.ovh.net/posts/"+id) else {fatalError("url false")}
-    var request = URLRequest(url : url)
-    request.httpMethod = "GET"
-    
-    URLSession.shared.dataTask(with: request) { data, response, error in
-        guard let httpResponse = response as? HTTPURLResponse,
-            (200...299).contains(httpResponse.statusCode) else {print(response!)
-                
-                return
-        }
-        // ensure there is no error for this HTTP response
-        guard error == nil else {
-            print ("error: \(error!)")
-            return
-        }
-        
-        // ensure there is data returned from this HTTP response
-        guard let content = data else {
-            print("No data")
-            return
-        }
-        
-        DispatchQueue.main.async {
-            do {
-                post = try JSONDecoder().decode(Post.self,from: content)
-                print(post)
-            } catch {print(error)
-                fatalError("cant decode")}
-        }
-        
-    }.resume()
-    return post
-}
 

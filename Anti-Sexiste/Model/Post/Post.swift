@@ -66,7 +66,6 @@ class Post :Identifiable,Codable, ObservableObject{
         try container.encodeIfPresent(_id, forKey: ._id)
         try container.encode(message, forKey: .message)
         try container.encode(title, forKey: .title)
-        try container.encode(createdAt, forKey: .createdAt)
         try container.encode(listResponse, forKey: .listResponse)
         try container.encodeIfPresent(author, forKey: .author)
         try container.encode(reaction, forKey: .reaction)
@@ -150,6 +149,49 @@ class Post :Identifiable,Codable, ObservableObject{
             return true
         }
         return false
+    }
+    
+    
+    func savePost(){
+        let session = URLSession.shared
+        let url = URL(string: "http://vps799211.ovh.net/posts")!
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        do {
+            let data = try JSONEncoder().encode(self)
+            print(data as NSData)
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpBody = data
+            let task = session.uploadTask(with: request, from: data){data, response, error in
+                guard let httpResponse = response as? HTTPURLResponse,
+                      (200...299).contains(httpResponse.statusCode) else {print(response!)
+                        
+                    return
+                }
+                print(httpResponse)
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+                guard let content = data else {
+                    print("No data")
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    do {
+                        let post : Post = try JSONDecoder().decode(Post.self, from: content)
+                        self._id = post._id
+                        self.createdAt = post.createdAt
+                    } catch {print(error)
+                        fatalError("cant decode")}
+                }
+
+            }
+            task.resume()
+        } catch {print(error)
+            fatalError("cant encode")}
+
     }
     
 }

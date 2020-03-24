@@ -38,17 +38,12 @@ struct AddResponseView: View {
                 }
                 Button(action:{
                     self.response.type = self.listTypeResponse.types[self.selection].typeResponse
-                    let today = Date()
-                    let formatter1 = DateFormatter()
-                    formatter1.dateStyle = .long
-                    self.response.createdAt = formatter1.string(from: today)
                     if self.post.listResponse != nil{
                         self.post.listResponse!.append(self.response)}else{
                         self.post.listResponse = [self.response]
                     }
                     
                     
-                    savePost(post: self.post)
                     self.response = Response()
                     self.showingAddResponseView = false
                 }) {

@@ -17,7 +17,21 @@ struct ListRowResponseView: View {
     }
     
     var body: some View {
-        Text(response.message)
+        HStack{
+            Text(response.message)
+            Spacer()
+            VStack{
+                Image(systemName: "flame")
+                    .foregroundColor(.red)
+                Text(String(response.reaction))
+            }
+            VStack{
+                Image(systemName: "heart.slash")
+                    .foregroundColor(.red)
+                Text(String(response.report))
+            }
+        }
+        
     }
 }
 
