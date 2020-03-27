@@ -13,6 +13,9 @@ struct SignUpView: View {
     @State var user : User = User()
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
+    
+    
+    
     var body: some View {
         VStack{
             if (userSession.isConnected){
@@ -27,15 +30,17 @@ struct SignUpView: View {
                         .padding(.all)
                     VStack{
                         Text("Email :")
-                        TextField("email", text: $user.pseudo)
+                        TextField("email", text: $user.email)
+                        Text("Pseudo :")
+                        TextField("pseudo", text: $user.pseudo)
                         Text("Password :")
                         SecureField("password", text: $user.password)
                         
                     }
                     .padding(.all)
                     Button(action:{
-                        self.userSession.setUser(user: self.user)
-                        saveUser(user : self.user)
+                        
+                        self.userSession.saveUser(user : self.user)
                         self.user = User()
                         self.mode.wrappedValue.dismiss()
                     }) {

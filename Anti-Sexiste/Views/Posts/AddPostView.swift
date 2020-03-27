@@ -25,7 +25,7 @@ struct AddPostView: View {
                 .padding([.top, .leading, .trailing])
             Picker("Lieu",selection: $selection) {
                 ForEach(0 ..< listPlace.places.count) { index in
-                    Text(self.listPlace.places[index].place).tag(index)
+                    Text(self.listPlace.places[index].name).tag(index)
                     
                 }
             }.labelsHidden()
@@ -37,14 +37,12 @@ struct AddPostView: View {
                     TextField("message", text: $post.message)
                 }
                 Button(action:{
-                    self.post.location = self.listPlace.places[self.selection].place
+                    self.post.location = self.listPlace.places[self.selection].name
                     if (self.userSession.isConnected){
                         self.post.author = self.userSession.user!.pseudo
                     }
-                    self.listPost.addPost(post: self.post)
-                    DispatchQueue.main.async {
-                        self.post.savePost()
-                    }
+                    self.listPost.addPost(post: self.post, user : self.userSession.user)
+
                     self.post = Post()
                     self.showingAddPostView = false
                 }) {

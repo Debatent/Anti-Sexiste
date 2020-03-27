@@ -63,7 +63,7 @@ struct PostView: View {
                             }
                         }
                         List{
-                            ForEach(filterResponse(listResponse: self.post.listResponse!, typeResponse: self.currentTypeResponse)){ response in
+                            ForEach(filterResponse(listResponse: self.post.comments!, typeResponse: self.currentTypeResponse)){ response in
                                 ListRowResponseView(response:response)
                             }
                         }
@@ -156,4 +156,3 @@ struct PostView_Previews: PreviewProvider {
 }
 
 
-///COM

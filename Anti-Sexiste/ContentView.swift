@@ -19,7 +19,7 @@ struct ContentView: View {
 
     @State var showingAddPostView = false
     
-    var listPlace : ListPlace = ListPlace()
+    @ObservedObject var listPlace : ListPlace = ListPlace()
     @State var currentPlace : String = "Tout"
     
     
@@ -32,18 +32,17 @@ struct ContentView: View {
                 VStack{
 
                     ScrollView(.horizontal, showsIndicators: false) {
+                        
                         HStack {
+                            
                             ForEach(self.listPlace.places) { place in
                                 Button(action: {
-                                        self.currentPlace = place.place
+                                    self.currentPlace = place.name
                                         
                                     
                                 }) {
                                     VStack{
-                                        
-                                        Image(place.icon).resizable()
-                                            .frame(width: 30, height: 30)
-                                        Text(place.place)
+                                        Text(place.name)
                                             .font(.caption)
                                     }
                                     .padding(.leading)
@@ -64,7 +63,7 @@ struct ContentView: View {
                             NavigationLink(destination: PostView(post: Post(id: post._id!), listPost: self.listPost).environmentObject(self.userSession)){
                                 ListRowPostView(post:post).environmentObject(self.userSession)
                             }
-                            
+
                         }
                     }
                 }

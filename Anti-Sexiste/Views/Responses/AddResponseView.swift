@@ -38,9 +38,9 @@ struct AddResponseView: View {
                 }
                 Button(action:{
                     self.response.type = self.listTypeResponse.types[self.selection].typeResponse
-                    if self.post.listResponse != nil{
-                        self.post.listResponse!.append(self.response)}else{
-                        self.post.listResponse = [self.response]
+                    if self.post.comments != nil{
+                        self.post.comments!.append(self.response)}else{
+                        self.post.comments = [self.response]
                     }
                     
                     

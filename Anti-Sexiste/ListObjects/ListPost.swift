@@ -43,11 +43,11 @@ class ListPost : ObservableObject,Identifiable{
                 print("No data")
                 return
             }
-            
+
+
             DispatchQueue.main.async {
                 do {
                     self.listPost = try JSONDecoder().decode([Post].self,from: content)
-
                 } catch {print(error)
                     fatalError("cant decode")}
             }
@@ -60,9 +60,51 @@ class ListPost : ObservableObject,Identifiable{
     
     
     
-    func addPost(post: Post){
-        self.listPost.append(post)
-    }
+    func addPost(post: Post, user : User?){
+        guard let data = try? JSONEncoder().encode(post) else {
+                fatalError("Cant load file")
+            }
+        
+            
+            if let url = URL(string: "http://vps799211.ovh.net/posts") {
+                var request = URLRequest(url: url)
+                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                if let user = user {
+                
+                    request.setValue(user.token, forHTTPHeaderField: "auth-token")
+                }
+                
+
+                request.httpMethod = "POST"
+                request.httpBody = data
+                
+                URLSession.shared.dataTask(with: request){data, response, error in
+                    guard let httpResponse = response as? HTTPURLResponse,
+                            (200...299).contains(httpResponse.statusCode) else {print(response!)
+                                
+                            return
+                        }
+                        if let error = error {
+                            print(error.localizedDescription)
+                        }
+                        guard let content = data else {
+                            print("No data")
+                            return
+                        }
+                            
+                        DispatchQueue.main.async {
+                            do {
+                                let post : Post = try JSONDecoder().decode(Post.self, from: content)
+                                self.listPost.append(post)
+                            } catch {print(error)
+                                fatalError("cant decode")}
+                        }
+
+                    }.resume()
+                }
+        }
+        
+    
     
     func deletePost(post : Post){
         if let index = self.listPost.firstIndex(where: {$0 === post}) {
@@ -70,7 +112,9 @@ class ListPost : ObservableObject,Identifiable{
         }
     }
     
-    
+    func savePost(){
+        
+        }
     
     
 }

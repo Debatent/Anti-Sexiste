@@ -17,17 +17,17 @@ struct ListRowPostView: View {
         
         HStack{
             VStack(alignment: .leading, spacing: 20){
-                Text(post.title)
+                Text(self.post.title)
                     .font(.title)
                     .fontWeight(.thin)
                     .foregroundColor(Color.gray)
                     .multilineTextAlignment(.center)
                     .padding([.top, .leading, .trailing])
-                Text(post.message)
+                Text(self.post.message)
                     .multilineTextAlignment(.center)
                     .lineLimit(2)
                     .padding(.all)
-                Text(post.createdAt)
+                Text(self.post.createdAt!)
                     .font(.caption)
                     .fontWeight(.ultraLight)
                     .multilineTextAlignment(.trailing)
@@ -36,12 +36,12 @@ struct ListRowPostView: View {
             Spacer()
             VStack{
                 Image(systemName: "flame").foregroundColor(.red)
-                Text(String(post.reaction))
+                Text(String(self.post.reaction))
             }
             VStack{
                 Image(systemName: "heart.slash")
                     .foregroundColor(.red)
-                Text(String(post.report))
+                Text(String(self.post.report))
             }
             
         }

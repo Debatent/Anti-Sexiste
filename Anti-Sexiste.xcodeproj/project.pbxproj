@@ -34,12 +34,8 @@
 		CEB0AEB024056D75008E7720 /* Anti_SexisteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0AEAF24056D75008E7720 /* Anti_SexisteUITests.swift */; };
 		CEC53951240D512100074B02 /* place.json in Resources */ = {isa = PBXBuildFile; fileRef = CEC53950240D512100074B02 /* place.json */; };
 		CEC53953240D517200074B02 /* ListPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC53952240D517200074B02 /* ListPlace.swift */; };
-		CEE1E16B240A5BB200046342 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = CEE1E16A240A5BB200046342 /* data.json */; };
-		CEEE69C324094D61008D5110 /* PostProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE69C224094D61008D5110 /* PostProtocol.swift */; };
 		CEEE69C524094ED4008D5110 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE69C424094ED4008D5110 /* Post.swift */; };
 		CEEE69CB24094F70008D5110 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE69CA24094F70008D5110 /* Response.swift */; };
-		CEEE69CF24094FC8008D5110 /* CategoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE69CE24094FC8008D5110 /* CategoryProtocol.swift */; };
-		CEEE69D12409503E008D5110 /* ResponseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE69D02409503E008D5110 /* ResponseProtocol.swift */; };
 		CEEE69D824096F7B008D5110 /* ListPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE69D724096F7B008D5110 /* ListPost.swift */; };
 /* End PBXBuildFile section */
 
@@ -94,12 +90,8 @@
 		CEB0AEB124056D75008E7720 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEC53950240D512100074B02 /* place.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = place.json; sourceTree = "<group>"; };
 		CEC53952240D517200074B02 /* ListPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPlace.swift; sourceTree = "<group>"; };
-		CEE1E16A240A5BB200046342 /* data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
-		CEEE69C224094D61008D5110 /* PostProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostProtocol.swift; sourceTree = "<group>"; };
 		CEEE69C424094ED4008D5110 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		CEEE69CA24094F70008D5110 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
-		CEEE69CE24094FC8008D5110 /* CategoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryProtocol.swift; sourceTree = "<group>"; };
-		CEEE69D02409503E008D5110 /* ResponseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseProtocol.swift; sourceTree = "<group>"; };
 		CEEE69D724096F7B008D5110 /* ListPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPost.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -168,7 +160,6 @@
 			isa = PBXGroup;
 			children = (
 				CEEE69C424094ED4008D5110 /* Post.swift */,
-				CEEE69C224094D61008D5110 /* PostProtocol.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -176,7 +167,6 @@
 		B7A7B19A240FBB3000A7CA6B /* Response */ = {
 			isa = PBXGroup;
 			children = (
-				CEEE69D02409503E008D5110 /* ResponseProtocol.swift */,
 				CEEE69CA24094F70008D5110 /* Response.swift */,
 			);
 			path = Response;
@@ -271,7 +261,6 @@
 		CEC53954240D525100074B02 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				CEE1E16A240A5BB200046342 /* data.json */,
 				CEC53950240D512100074B02 /* place.json */,
 				B7A7B1A2240FEA5C00A7CA6B /* JsonDATA.swift */,
 				B7A7B1AE240FF39C00A7CA6B /* typeResponse.json */,
@@ -287,7 +276,6 @@
 				B7A7B19F240FE9EA00A7CA6B /* Category */,
 				B7A7B19A240FBB3000A7CA6B /* Response */,
 				B7A7B199240FBB1D00A7CA6B /* Post */,
-				CEEE69CE24094FC8008D5110 /* CategoryProtocol.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -412,7 +400,6 @@
 				B77D17EA2417D8C40079244A /* user.json in Resources */,
 				CEB0AE9424056D74008E7720 /* Assets.xcassets in Resources */,
 				B7A7B1AF240FF39C00A7CA6B /* typeResponse.json in Resources */,
-				CEE1E16B240A5BB200046342 /* data.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,13 +424,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEEE69C324094D61008D5110 /* PostProtocol.swift in Sources */,
 				CE48B0DC240A697200CA0463 /* ListRowPostView.swift in Sources */,
 				CEB0AE8B24056D73008E7720 /* AppDelegate.swift in Sources */,
 				CEEE69CB24094F70008D5110 /* Response.swift in Sources */,
 				CEEE69C524094ED4008D5110 /* Post.swift in Sources */,
 				CEB0AE9024056D73008E7720 /* Anti_Sexiste.xcdatamodeld in Sources */,
-				CEEE69D12409503E008D5110 /* ResponseProtocol.swift in Sources */,
 				CEEE69D824096F7B008D5110 /* ListPost.swift in Sources */,
 				CE943CD1240CF61F006486E3 /* ListRowResponseView.swift in Sources */,
 				B7A7B1A3240FEA5C00A7CA6B /* JsonDATA.swift in Sources */,
@@ -457,7 +442,6 @@
 				CEB0AE9224056D73008E7720 /* ContentView.swift in Sources */,
 				CEB0AE8D24056D73008E7720 /* SceneDelegate.swift in Sources */,
 				CE8E4221240E947500EC2F77 /* AddPostView.swift in Sources */,
-				CEEE69CF24094FC8008D5110 /* CategoryProtocol.swift in Sources */,
 				B736B63C24127F80009DE689 /* PostView.swift in Sources */,
 				B736B6402412A2C3009DE689 /* SignInView.swift in Sources */,
 				B7A7B1AB240FF2A200A7CA6B /* TypeResponse.swift in Sources */,

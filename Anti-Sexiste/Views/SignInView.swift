@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SignInView: View {
     @EnvironmentObject var userSession : UserSession
-    @State var email : String = ""
+    @State var pseudo : String = ""
     @State var password : String = ""
     var body: some View {
         VStack{
@@ -19,21 +19,21 @@ struct SignInView: View {
             }
             else {
                 Form{
-                    Text("Vous avez déjà un compte ? connectez vous !")                       .font(.headline)
+                    Text("Vous avez déjà un compte ? connectez vous !")
+                        .font(.headline)
                         .fontWeight(.thin)
                         .multilineTextAlignment(.center)
                         .padding(.all)
                     VStack{
-                        Text("Email :")
-                        TextField("email", text: $email)
+                        Text("Pseudo :")
+                        TextField("pseudo", text: $pseudo)
                         Text("Password :")
                         SecureField("password", text: $password)
                         
                     }
                     .padding(.all)
                     Button(action:{
-                        
-                        
+                        self.userSession.login(pseudo: self.pseudo, password: self.password)
                     }) {
                         Text("Connexion")
                     }.frame(minWidth: 0, maxWidth: .infinity)
