@@ -77,6 +77,39 @@ class Post :Identifiable,Codable, ObservableObject{
     
     
     init(id : String){
+        self.location = ""
+        self._id = ""
+        self.message = ""
+        self.title = ""
+        self.createdAt = nil
+        self.comments = []
+        self.author = nil
+        self.reaction = 0
+        self.report = 0
+        self.updatedAt = nil
+        self.__v = nil
+        self.reloadPost(id : id)
+    }
+    
+    init(placePost : String,idPost : String?,listResponse : [Response]?, message : String, title : String, date : String?, user: String?){
+        self.location = placePost
+        self._id = idPost
+        self.comments = listResponse
+        self.message = message
+        self.title = title
+        self.createdAt = date
+        self.reaction = 0
+        self.report = 0
+        self.updatedAt = nil
+        self.__v = 0
+    }
+    
+    convenience init() {
+        self.init(placePost : "",idPost : nil, listResponse : [], message : "", title : "", date : nil, user : nil)
+    }
+    
+    
+    func reloadPost(id : String){
         guard let url = URL(string: "http://vps799211.ovh.net/posts/"+id) else {fatalError("url false")}
         var request = URLRequest(url : url)
         request.httpMethod = "GET"
@@ -97,13 +130,11 @@ class Post :Identifiable,Codable, ObservableObject{
 
                 return
             }
-            // ensure there is no error for this HTTP response
             guard error == nil else {
                 print ("error: \(error!)")
                 return
             }
             
-            // ensure there is data returned from this HTTP response
             guard let content = data else {
                 print("No data")
                 return
@@ -131,33 +162,6 @@ class Post :Identifiable,Codable, ObservableObject{
             
             
         }.resume()
-        
-    }
-    
-    init(placePost : String,idPost : String?,listResponse : [Response]?, message : String, title : String, date : String?, user: String?){
-        self.location = placePost
-        self._id = idPost
-        self.comments = listResponse
-        self.message = message
-        self.title = title
-        self.createdAt = date
-        self.reaction = 0
-        self.report = 0
-        self.updatedAt = nil
-        self.__v = 0
-    }
-    
-    convenience init() {
-        self.init(placePost : "",idPost : nil, listResponse : [], message : "", title : "", date : nil, user : nil)
-    }
-    
-    func increment(user : User)->Bool{
-        if (!user.postReaction.contains(self._id!)){
-            user.postReaction.append(self._id!)
-            self.reaction += 1
-            return true
-        }
-        return false
     }
     
     

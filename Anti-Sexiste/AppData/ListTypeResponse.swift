@@ -1,21 +1,21 @@
 //
-//  ListPlace.swift
+//  ListTypeResponse.swift
 //  Anti-Sexiste
 //
-//  Created by user165109 on 02/03/2020.
+//  Created by etud on 04/03/2020.
 //  Copyright © 2020 user165109. All rights reserved.
 //
 
 import Foundation
 
 
-class ListPlace : ObservableObject,Identifiable{
-    @Published var places : [Place]
+class ListTypeResponse : Identifiable{
+    var types : [TypeResponse]
     
     init(){
-        self.places = []
+        self.types = []
         
-        guard let url = URL(string: "http://vps799211.ovh.net/labels/posts") else {fatalError("url false")}
+        guard let url = URL(string: "http://vps799211.ovh.net/labels/comments") else {fatalError("url false")}
         var request = URLRequest(url : url)
         request.httpMethod = "GET"
         
@@ -39,23 +39,13 @@ class ListPlace : ObservableObject,Identifiable{
             
 
                 do {
-                    self.places = try JSONDecoder().decode([Place].self,from: content)
-                    print(self.places)
+                    self.types = try JSONDecoder().decode([TypeResponse].self,from: content)
                 } catch {print(error)
                     fatalError("cant decode")}
-            
+                
             
             
             
         }.resume()
     }
-}
-
-
-func filterResponse(listResponse : [Response], typeResponse : String)->[Response]{
-    if (typeResponse != "Tout"){
-        return  listResponse.filter { $0.type == typeResponse }
-    }
-    else{
-        return listResponse    }
 }

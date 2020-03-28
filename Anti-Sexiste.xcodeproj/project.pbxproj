@@ -120,15 +120,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B77D17EB2417E6FE0079244A /* User */ = {
-			isa = PBXGroup;
-			children = (
-				CE89074E2416975200ABDE4C /* User.swift */,
-				B77D17EC2417E70D0079244A /* UserSession.swift */,
-			);
-			path = User;
-			sourceTree = "<group>";
-		};
 		B77D17EE2417F8730079244A /* Responses */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,22 +145,6 @@
 				B70B71612418E36200CA87F6 /* ProfilView.swift */,
 			);
 			path = User;
-			sourceTree = "<group>";
-		};
-		B7A7B199240FBB1D00A7CA6B /* Post */ = {
-			isa = PBXGroup;
-			children = (
-				CEEE69C424094ED4008D5110 /* Post.swift */,
-			);
-			path = Post;
-			sourceTree = "<group>";
-		};
-		B7A7B19A240FBB3000A7CA6B /* Response */ = {
-			isa = PBXGroup;
-			children = (
-				CEEE69CA24094F70008D5110 /* Response.swift */,
-			);
-			path = Response;
 			sourceTree = "<group>";
 		};
 		B7A7B19F240FE9EA00A7CA6B /* Category */ = {
@@ -217,7 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				CEC53954240D525100074B02 /* Data */,
-				CEEE69D624096F4A008D5110 /* ListObjects */,
+				CEEE69D624096F4A008D5110 /* AppData */,
 				CEEE69C124094CBA008D5110 /* Model */,
 				CEB0AE8A24056D73008E7720 /* AppDelegate.swift */,
 				CEB0AE8C24056D73008E7720 /* SceneDelegate.swift */,
@@ -272,22 +247,23 @@
 		CEEE69C124094CBA008D5110 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B77D17EB2417E6FE0079244A /* User */,
+				CE89074E2416975200ABDE4C /* User.swift */,
+				CEEE69CA24094F70008D5110 /* Response.swift */,
+				CEEE69C424094ED4008D5110 /* Post.swift */,
 				B7A7B19F240FE9EA00A7CA6B /* Category */,
-				B7A7B19A240FBB3000A7CA6B /* Response */,
-				B7A7B199240FBB1D00A7CA6B /* Post */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		CEEE69D624096F4A008D5110 /* ListObjects */ = {
+		CEEE69D624096F4A008D5110 /* AppData */ = {
 			isa = PBXGroup;
 			children = (
+				B77D17EC2417E70D0079244A /* UserSession.swift */,
 				CEEE69D724096F7B008D5110 /* ListPost.swift */,
 				CEC53952240D517200074B02 /* ListPlace.swift */,
 				B7A7B1AC240FF35A00A7CA6B /* ListTypeResponse.swift */,
 			);
-			path = ListObjects;
+			path = AppData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -27,7 +27,7 @@ struct AddResponseView: View {
                 .padding([.top, .leading, .trailing])
             Picker("Type :",selection: $selection) {
                 ForEach(0 ..< listTypeResponse.types.count) { index in
-                    Text(self.listTypeResponse.types[index].typeResponse).tag(index)
+                    Text(self.listTypeResponse.types[index].name).tag(index)
                     
                 }
             }.labelsHidden()
@@ -37,7 +37,7 @@ struct AddResponseView: View {
                     TextField("message", text: $response.message)
                 }
                 Button(action:{
-                    self.response.type = self.listTypeResponse.types[self.selection].typeResponse
+                    self.response.type = self.listTypeResponse.types[self.selection].name
                     if self.post.comments != nil{
                         self.post.comments!.append(self.response)}else{
                         self.post.comments = [self.response]

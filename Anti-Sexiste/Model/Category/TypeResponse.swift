@@ -9,13 +9,28 @@
 import Foundation
 
 class TypeResponse:Identifiable,Codable{
-    var typeResponse : String
+    var name : String
     
     init(typeResponse : String){
-        self.typeResponse = typeResponse
+        self.name = typeResponse
     }
     
     convenience init(){
         self.init(typeResponse : "")
     }
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+        
+    }
+    
+    required init(from decoder: Decoder) throws {
+            do {
+                let values = try decoder.container(keyedBy: CodingKeys.self)
+                self.name = try values.decode(String.self, forKey: .name)
+
+
+            } catch {print(error)
+                fatalError("cant decode")}
+        }
 }

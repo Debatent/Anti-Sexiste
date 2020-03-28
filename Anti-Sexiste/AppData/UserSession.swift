@@ -114,7 +114,6 @@ class UserSession:ObservableObject{
                             user.token = token
                         }
                         self.setUser(user: user)
-                        print(user)
                     } catch {print(error)
                         fatalError("cant decode")}
                 }
@@ -122,6 +121,45 @@ class UserSession:ObservableObject{
             }.resume()
         }
     }
+    
+    func incrementPost(user : User, post : Post)->Bool{
+        print(user.postReaction)
+        if (!user.postReaction.contains(post._id!)){
+            guard let data = try? JSONEncoder().encode(post) else {
+                    fatalError("Cant load file")
+                }
+            print(String(data: data, encoding: .utf8)!)
+            
+                
+            if let url = URL(string: "http://vps799211.ovh.net/posts/"+post._id!+"/like") {
+                    var request = URLRequest(url: url)
+                    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                    request.setValue(user.token, forHTTPHeaderField: "auth-token")
+                    request.httpMethod = "POST"
+                    request.httpBody = data
+                    
+                    URLSession.shared.dataTask(with: request){data, response, error in
+                        guard let httpResponse = response as? HTTPURLResponse,
+                                (200...299).contains(httpResponse.statusCode) else {print(response!)
+                                    
+                                return
+                            }
+                            if let error = error {
+                                print(error.localizedDescription)
+                            }
+                           
+                                
+                            
+
+                        }.resume()
+                self.user!.postReaction.append(post._id!)
+                
+            return true
+        }
+    }
+        return false
+    }
+    
     
     
     

@@ -12,7 +12,12 @@ struct ProfilView: View {
     @EnvironmentObject var userSession : UserSession
 
     var body: some View {
-        Text(userSession.user!.pseudo)
+        VStack{
+            if(userSession.isConnected){
+                Text(userSession.user!.pseudo)
+            }
+        }
+        
     }
 }
 

@@ -34,6 +34,19 @@ struct ContentView: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         
                         HStack {
+                            Button(action: {
+                                self.currentPlace = "Tout"
+                                    
+                                
+                            }) {
+                                VStack{
+                                    Image("Tout")
+                                    Text("Tout")
+                                        .font(.caption)
+                                    
+                                }
+                                .padding(.leading)
+                            }
                             
                             ForEach(self.listPlace.places) { place in
                                 Button(action: {
@@ -42,6 +55,7 @@ struct ContentView: View {
                                     
                                 }) {
                                     VStack{
+                                        Image(place.name)
                                         Text(place.name)
                                             .font(.caption)
                                     }
@@ -60,6 +74,7 @@ struct ContentView: View {
                     
                     List{
                         ForEach(filterList(listPost: self.listPost.listPost, place: self.currentPlace)){ post in
+                            
                             NavigationLink(destination: PostView(post: Post(id: post._id!), listPost: self.listPost).environmentObject(self.userSession)){
                                 ListRowPostView(post:post).environmentObject(self.userSession)
                             }

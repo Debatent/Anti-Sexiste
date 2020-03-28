@@ -24,7 +24,9 @@ struct PostView: View {
     
     var verificationBox: Alert {
         Alert(title: Text("Supression du post"), message: Text("Voulez vous vraiment supprimer ce post ?"), primaryButton: .destructive(Text("Supprimer")) {
-            self.listPost.deletePost(post: self.post)
+            DispatchQueue.main.async {
+                self.listPost.deletePost(post: self.post, user : self.userSession.user!)
+            }
             self.mode.wrappedValue.dismiss()
             }, secondaryButton: .cancel())
     }
@@ -40,6 +42,7 @@ struct PostView: View {
         VStack{
             ZStack{
                 VStack{
+                    Text(self.post.title).font(.title)
                     Text(self.post.message)
                         .multilineTextAlignment(.center)
                         .lineLimit(100)
@@ -47,12 +50,23 @@ struct PostView: View {
                     VStack{
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
+                                Button(action: {
+                                    self.currentTypeResponse = "Tout"
+                                }) {
+                                    HStack{
+                                        Text("Tout")
+                                            .font(.caption)
+                                        
+                                    }
+                                    .padding(.leading)
+                                }
+
                                 ForEach(self.listTypeResponse.types) { type in
                                     Button(action: {
-                                        self.currentTypeResponse = type.typeResponse
+                                        self.currentTypeResponse = type.name
                                     }) {
                                         HStack{
-                                            Text(type.typeResponse)
+                                            Text(type.name)
                                                 .font(.caption)
                                             
                                         }
@@ -125,13 +139,16 @@ struct PostView: View {
                 }
             }
             
-        }.navigationBarTitle(post.title).navigationBarItems(trailing:
+        }.navigationBarItems(trailing:
             HStack{
                 if (userSession.isConnected){
                     Button(action: {
-                        if (!self.post.increment(user: self.userSession.user!)){
+                        if (!self.userSession.incrementPost(user: self.userSession.user!, post: self.post)){
                             self.showingAlert = true
+                        }else{
+                            self.post.reaction += 1
                         }
+        
                     }) {
                         Image(systemName: "plus")
                     }.alert(isPresented: $showingAlert, content: {self.failureMark})
