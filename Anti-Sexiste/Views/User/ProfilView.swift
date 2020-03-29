@@ -9,12 +9,12 @@
 import SwiftUI
 
 struct ProfilView: View {
-    @EnvironmentObject var userSession : UserSession
+    @EnvironmentObject var appSession : AppSession
 
     var body: some View {
         VStack{
-            if(userSession.isConnected){
-                Text(userSession.user!.pseudo)
+            if(appSession.isConnected){
+                Text(appSession.user!.pseudo)
             }
         }
         

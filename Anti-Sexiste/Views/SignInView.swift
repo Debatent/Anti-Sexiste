@@ -9,12 +9,12 @@
 import SwiftUI
 
 struct SignInView: View {
-    @EnvironmentObject var userSession : UserSession
+    @EnvironmentObject var appSession : AppSession
     @State var pseudo : String = ""
     @State var password : String = ""
     var body: some View {
         VStack{
-            if (userSession.isConnected){
+            if (appSession.isConnected){
                 ProfilView()
             }
             else {
@@ -33,7 +33,7 @@ struct SignInView: View {
                     }
                     .padding(.all)
                     Button(action:{
-                        self.userSession.login(pseudo: self.pseudo, password: self.password)
+                        self.appSession.login(pseudo: self.pseudo, password: self.password)
                     }) {
                         Text("Connexion")
                     }.frame(minWidth: 0, maxWidth: .infinity)

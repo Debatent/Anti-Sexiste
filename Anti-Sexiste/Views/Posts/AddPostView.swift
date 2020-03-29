@@ -9,12 +9,10 @@
 import SwiftUI
 
 struct AddPostView: View {
-    @EnvironmentObject var userSession : UserSession
+    @EnvironmentObject var appSession : AppSession
     @Binding var showingAddPostView: Bool
     @State private var selection : Int = 0
     @State var post : Post = Post()
-    var listPlace : ListPlace
-    @ObservedObject var listPost : ListPost
     var body: some View {
         VStack{
             Text("Ecrit ton post :")
@@ -24,8 +22,8 @@ struct AddPostView: View {
                 .multilineTextAlignment(.center)
                 .padding([.top, .leading, .trailing])
             Picker("Lieu",selection: $selection) {
-                ForEach(0 ..< listPlace.places.count) { index in
-                    Text(self.listPlace.places[index].name).tag(index)
+                ForEach(0 ..< self.appSession.listPlace.count) { index in
+                    Text(self.appSession.listPlace[index].name).tag(index)
                     
                 }
             }.labelsHidden()
@@ -37,11 +35,11 @@ struct AddPostView: View {
                     TextField("message", text: $post.message)
                 }
                 Button(action:{
-                    self.post.location = self.listPlace.places[self.selection].name
-                    if (self.userSession.isConnected){
-                        self.post.author = self.userSession.user!.pseudo
+                    self.post.location = self.appSession.listPlace[self.selection].name
+                    if (self.appSession.isConnected){
+                        self.post.author = self.appSession.user!.pseudo
                     }
-                    self.listPost.addPost(post: self.post, user : self.userSession.user)
+                    self.appSession.addPost(post: self.post, user : self.appSession.user)
 
                     self.post = Post()
                     self.showingAddPostView = false
@@ -64,6 +62,6 @@ struct AddPostView: View {
 
 struct AddPostView_Previews: PreviewProvider {
     static var previews: some View {
-        AddPostView(showingAddPostView: .constant(false),listPlace: ListPlace(), listPost : ListPost())
+        AddPostView(showingAddPostView: .constant(false))
     }
 }

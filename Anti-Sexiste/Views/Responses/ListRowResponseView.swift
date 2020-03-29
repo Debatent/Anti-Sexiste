@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct ListRowResponseView: View {
-    @EnvironmentObject var userSession : UserSession
+    @EnvironmentObject var appSession : AppSession
 
     var response : Response
     init(response : Response){

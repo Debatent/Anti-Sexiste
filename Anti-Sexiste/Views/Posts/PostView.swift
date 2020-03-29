@@ -10,13 +10,14 @@ import SwiftUI
 import Combine
 
 struct PostView: View {
-    @EnvironmentObject var userSession : UserSession
+    @EnvironmentObject var appSession : AppSession
     @State var showingAddResponseView = false
     @ObservedObject var post : Post
-    @ObservedObject var listPost : ListPost
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     @State private var showingAlert = false
     @State private var showingVerification = false
+    
+    
     
     var failureMark: Alert {
         Alert(title: Text("Echec"), message: Text("Vous avez déjà voté pour ce post."), dismissButton: .default(Text("Ok")))
@@ -25,14 +26,13 @@ struct PostView: View {
     var verificationBox: Alert {
         Alert(title: Text("Supression du post"), message: Text("Voulez vous vraiment supprimer ce post ?"), primaryButton: .destructive(Text("Supprimer")) {
             DispatchQueue.main.async {
-                self.listPost.deletePost(post: self.post, user : self.userSession.user!)
+                self.appSession.deletePost(post: self.post, user : self.appSession.user!)
             }
             self.mode.wrappedValue.dismiss()
             }, secondaryButton: .cancel())
     }
     
     
-    var listTypeResponse : ListTypeResponse = ListTypeResponse()
     
     
     
@@ -61,7 +61,7 @@ struct PostView: View {
                                     .padding(.leading)
                                 }
 
-                                ForEach(self.listTypeResponse.types) { type in
+                                ForEach(self.appSession.types) { type in
                                     Button(action: {
                                         self.currentTypeResponse = type.name
                                     }) {
@@ -86,8 +86,8 @@ struct PostView: View {
                 VStack{
                     Spacer()
                     HStack {
-                        if (self.userSession.isConnected && self.post.author != nil){
-                            if (self.post.author! == self.userSession.user!.pseudo){
+                        if (self.appSession.isConnected && self.post.author != nil){
+                            if (self.post.author! == self.appSession.user!.pseudo){
                                 HStack {
                                     Button(action: {
                                         self.showingVerification = true
@@ -131,7 +131,7 @@ struct PostView: View {
                                         radius: 3,
                                         x: 3,
                                         y: 3).sheet(isPresented: $showingAddResponseView) {
-                                            AddResponseView(showingAddResponseView : self.$showingAddResponseView, post : self.post, listTypeResponse: self.listTypeResponse).environmentObject(self.userSession)
+                                            AddResponseView(showingAddResponseView : self.$showingAddResponseView, post : self.post).environmentObject(self.appSession)
                             }
                         }
                     }
@@ -141,12 +141,10 @@ struct PostView: View {
             
         }.navigationBarItems(trailing:
             HStack{
-                if (userSession.isConnected){
+                if (appSession.isConnected){
                     Button(action: {
-                        if (!self.userSession.incrementPost(user: self.userSession.user!, post: self.post)){
+                        if (!self.appSession.incrementPost(user: self.appSession.user!, post: self.post)){
                             self.showingAlert = true
-                        }else{
-                            self.post.reaction += 1
                         }
         
                     }) {
@@ -168,7 +166,7 @@ struct PostView: View {
 struct PostView_Previews: PreviewProvider {
     static let p = Post()
     static var previews: some View {
-        PostView(post: self.p, listPost: ListPost())
+        PostView(post: self.p)
     }
 }
 

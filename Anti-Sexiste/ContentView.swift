@@ -11,15 +11,13 @@ import Combine
 
 
 struct ContentView: View {
-    @EnvironmentObject var userSession : UserSession
-    @ObservedObject var listPost : ListPost = ListPost()
+    @EnvironmentObject var appSession : AppSession
     
     
     @State private var showingAlert = false
 
     @State var showingAddPostView = false
     
-    @ObservedObject var listPlace : ListPlace = ListPlace()
     @State var currentPlace : String = "Tout"
     
     
@@ -48,7 +46,7 @@ struct ContentView: View {
                                 .padding(.leading)
                             }
                             
-                            ForEach(self.listPlace.places) { place in
+                            ForEach(self.appSession.listPlace) { place in
                                 Button(action: {
                                     self.currentPlace = place.name
                                         
@@ -73,10 +71,10 @@ struct ContentView: View {
                     
                     
                     List{
-                        ForEach(filterList(listPost: self.listPost.listPost, place: self.currentPlace)){ post in
+                        ForEach(filterList(listPost: self.appSession.listPost, place: self.currentPlace)){ post in
                             
-                            NavigationLink(destination: PostView(post: Post(id: post._id!), listPost: self.listPost).environmentObject(self.userSession)){
-                                ListRowPostView(post:post).environmentObject(self.userSession)
+                            NavigationLink(destination: PostView(post: self.appSession.listPost.filter { $0._id! == post._id! }[0]).environmentObject(self.appSession)){
+                                ListRowPostView(post:post).environmentObject(self.appSession)
                             }
 
                         }
@@ -103,15 +101,15 @@ struct ContentView: View {
                                     radius: 3,
                                     x: 3,
                                     y: 3).sheet(isPresented: $showingAddPostView) {
-                                        AddPostView(showingAddPostView: self.$showingAddPostView, listPlace: self.listPlace, listPost: self.listPost).environmentObject(self.userSession)
+                                        AddPostView(showingAddPostView: self.$showingAddPostView).environmentObject(self.appSession)
                         }
                     }
                 }
             }.navigationBarItems(trailing:
                 HStack {
-                    if (userSession.isConnected){
+                    if (appSession.isConnected){
                         Button(action : {
-                            self.userSession.setUser(user: nil)
+                            self.appSession.setUser(user: nil)
                             self.showingAlert = true
                         }){
                             Image("icons8-shutdown-50")

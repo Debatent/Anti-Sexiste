@@ -9,12 +9,11 @@
 import SwiftUI
 
 struct AddResponseView: View {
-    @EnvironmentObject var userSession : UserSession
+    @EnvironmentObject var appSession : AppSession
     @Binding var showingAddResponseView: Bool
     @ObservedObject var post : Post
     @State private var selection : Int = 0
     @State var response : Response = Response()
-    var listTypeResponse : ListTypeResponse
     
     
     var body: some View {
@@ -26,8 +25,8 @@ struct AddResponseView: View {
                 .multilineTextAlignment(.center)
                 .padding([.top, .leading, .trailing])
             Picker("Type :",selection: $selection) {
-                ForEach(0 ..< listTypeResponse.types.count) { index in
-                    Text(self.listTypeResponse.types[index].name).tag(index)
+                ForEach(0 ..< self.appSession.types.count) { index in
+                    Text(self.appSession.types[index].name).tag(index)
                     
                 }
             }.labelsHidden()
@@ -37,11 +36,9 @@ struct AddResponseView: View {
                     TextField("message", text: $response.message)
                 }
                 Button(action:{
-                    self.response.type = self.listTypeResponse.types[self.selection].name
-                    if self.post.comments != nil{
-                        self.post.comments!.append(self.response)}else{
-                        self.post.comments = [self.response]
-                    }
+                    self.response.type = self.appSession.types[self.selection].name
+                    self.appSession.addResponse(response: self.response, user: self.appSession.user, post: self.post)
+                    
                     
                     
                     self.response = Response()
@@ -55,7 +52,7 @@ struct AddResponseView: View {
                     .cornerRadius(40)
                     .padding(.horizontal, 20)
             }
-
+            
         }
         
     }
@@ -63,6 +60,6 @@ struct AddResponseView: View {
 
 struct AddResponseView_Previews: PreviewProvider {
     static var previews: some View {
-        AddResponseView(showingAddResponseView: .constant(false),post: Post(), listTypeResponse: ListTypeResponse())
+        AddResponseView(showingAddResponseView: .constant(false),post: Post())
     }
 }

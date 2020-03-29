@@ -110,7 +110,7 @@ class Post :Identifiable,Codable, ObservableObject{
     
     
     func reloadPost(id : String){
-        guard let url = URL(string: "http://vps799211.ovh.net/posts/"+id) else {fatalError("url false")}
+        guard let url = URL(string: "https://azur-vo.fr/posts/"+id) else {fatalError("url false")}
         var request = URLRequest(url : url)
         request.httpMethod = "GET"
         self.location = ""

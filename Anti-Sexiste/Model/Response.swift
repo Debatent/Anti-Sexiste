@@ -56,12 +56,9 @@ class Response: Identifiable, Codable, ObservableObject{
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(_id, forKey: ._id)
         try container.encode(message, forKey: .message)
         try container.encode(type, forKey: .type)
         try container.encodeIfPresent(author, forKey: .author)
-        try container.encode(reaction, forKey: .reaction)
-        try container.encode(report, forKey: .report)
 
     }
     

@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct SignUpView: View {
-    @EnvironmentObject var userSession : UserSession
+    @EnvironmentObject var appSession : AppSession
     @State var user : User = User()
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
@@ -18,7 +18,7 @@ struct SignUpView: View {
     
     var body: some View {
         VStack{
-            if (userSession.isConnected){
+            if (appSession.isConnected){
                 Text("Vous êtes inscrit.")
             }
             else {
@@ -40,7 +40,7 @@ struct SignUpView: View {
                     .padding(.all)
                     Button(action:{
                         
-                        self.userSession.saveUser(user : self.user)
+                        self.appSession.saveUser(user : self.user)
                         self.user = User()
                         self.mode.wrappedValue.dismiss()
                     }) {
