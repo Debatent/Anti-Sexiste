@@ -33,6 +33,7 @@ struct SignInView: View {
                     }
                     .padding(.all)
                     Button(action:{
+                        print("coucou")
                         self.appSession.login(pseudo: self.pseudo, password: self.password)
                     }) {
                         Text("Connexion")

@@ -7,8 +7,10 @@
 //
 
 import Foundation
+import Combine
+import SwiftUI
 
-class AppSession:ObservableObject,Identifiable{
+class AppSession: ObservableObject,Identifiable {
     @Published var isConnected : Bool
     @Published var user : User?
     @Published var listPost : [Post] = []
@@ -46,7 +48,7 @@ class AppSession:ObservableObject,Identifiable{
         guard let data = try? JSONEncoder().encode(user) else {
             fatalError("Cant load file")
         }
-        if let url = URL(string: "https://azur-vo.fr/register") {
+        if let url = URL(string: "https://api.azur-vo.fr/register") {
             var request = URLRequest(url: url)
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             
@@ -88,13 +90,12 @@ class AppSession:ObservableObject,Identifiable{
     func login(pseudo : String, password : String){
         let body = [ "user" : pseudo, "password" : password]
         let finalBody = try! JSONSerialization.data(withJSONObject: body)
-        if let url = URL(string: "https://azur-vo.fr/login") {
+        if let url = URL(string: "https://api.azur-vo.fr/login") {
             var request = URLRequest(url: url)
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             
             request.httpMethod = "POST"
             request.httpBody = finalBody
-            
             
             URLSession.shared.dataTask(with: request){data, response, error in
                 guard let httpResponse = response as? HTTPURLResponse,
@@ -127,19 +128,13 @@ class AppSession:ObservableObject,Identifiable{
         }
     }
     
-    func incrementPost(user : User, post : Post)->Bool{
+    func incrementPostReaction(user : User, post : Post)->Bool{
         if (!user.postReaction.contains(post._id!)){
-            guard let data = try? JSONEncoder().encode(post) else {
-                fatalError("Cant load file")
-            }
-            
-            
-            if let url = URL(string: "https://azur-vo.fr/posts/"+post._id!+"/like") {
+            if let url = URL(string: "https://api.azur-vo.fr/posts/"+post._id!+"/like") {
                 var request = URLRequest(url: url)
                 request.setValue("application/json", forHTTPHeaderField: "Content-Type")
                 request.setValue(user.token, forHTTPHeaderField: "auth-token")
-                request.httpMethod = "PATCH"
-                request.httpBody = data
+                request.httpMethod = "POST"
                 
                 URLSession.shared.dataTask(with: request){data, response, error in
                     guard let httpResponse = response as? HTTPURLResponse,
@@ -147,6 +142,7 @@ class AppSession:ObservableObject,Identifiable{
                             
                             return
                     }
+                    print(httpResponse)
                     if let error = error {
                         print(error.localizedDescription)
                     }
@@ -166,10 +162,110 @@ class AppSession:ObservableObject,Identifiable{
     }
     
     
+    func decrementPostReaction(user : User, post : Post)->Bool{
+        if (user.postReaction.contains(post._id!)){
+            if let url = URL(string: "https://api.azur-vo.fr/posts/"+post._id!+"/unlike") {
+                var request = URLRequest(url: url)
+                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.setValue(user.token, forHTTPHeaderField: "auth-token")
+                request.httpMethod = "DELETE"
+                URLSession.shared.dataTask(with: request){data, response, error in
+                    
+                    guard let httpResponse = response as? HTTPURLResponse,
+                        (200...299).contains(httpResponse.statusCode) else {print(response!)
+                            
+                            return
+                    }
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+                }.resume()
+                
+                if let index = self.user!.commentReaction.firstIndex(where: {$0 == post._id!}){
+                    self.user!.postReaction.remove(at: index)
+                }
+                if let index = self.listPost.firstIndex(where: {$0._id! == post._id!}){
+                    self.listPost[index].reaction -= 1
+                }
+                return true
+            }
+        }
+        return false
+    }
     
+    func incrementPostReport(user : User, post : Post)->Bool{
+        if (!user.postReaction.contains(post._id!)){
+            if let url = URL(string: "https://api.azur-vo.fr/posts/"+post._id!+"/report") {
+                var request = URLRequest(url: url)
+                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.setValue(user.token, forHTTPHeaderField: "auth-token")
+                request.httpMethod = "POST"
+                
+                URLSession.shared.dataTask(with: request){data, response, error in
+                    guard let httpResponse = response as? HTTPURLResponse,
+                        (200...299).contains(httpResponse.statusCode) else {print(response!)
+                            
+                            return
+                    }
+                    print(httpResponse)
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+                    
+                    
+                    
+                    
+                }.resume()
+                self.user!.postReported.append(post._id!)
+                if let index = self.listPost.firstIndex(where: {$0._id! == post._id!}){
+                    self.listPost[index].report += 1
+                }
+                return true
+            }
+        }
+        return false
+    }
+    
+    
+    
+    
+    func incrementCommentReport(user : User, post : Post, response : Response)->Bool{
+        if (!user.postReaction.contains(post._id!)){
+            if let url = URL(string: "https://api.azur-vo.fr/posts/"+post._id!+"/"+response._id!+"/report") {
+                var request = URLRequest(url: url)
+                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.setValue(user.token, forHTTPHeaderField: "auth-token")
+                request.httpMethod = "POST"
+                
+                URLSession.shared.dataTask(with: request){data, response, error in
+                    guard let httpResponse = response as? HTTPURLResponse,
+                        (200...299).contains(httpResponse.statusCode) else {print(response!)
+                            
+                            return
+                    }
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+                    
+                    
+                    
+                    
+                }.resume()
+                self.user!.postReported.append(post._id!)
+                if let index = self.listPost.firstIndex(where: {$0._id! == post._id!}){
+                    self.listPost[index].report += 1
+                }
+                return true
+            }
+        }
+        return false
+    }
+    
+    
+    		
     
     func loadListPost(){
-        guard let url = URL(string: "https://azur-vo.fr/posts") else {fatalError("url false")}
+        guard let url = URL(string: "https://api.azur-vo.fr/posts") else {fatalError("url false")}
         var request = URLRequest(url : url)
         request.httpMethod = "GET"
         
@@ -190,13 +286,14 @@ class AppSession:ObservableObject,Identifiable{
                 print("No data")
                 return
             }
-            
+            DispatchQueue.main.async {
+
                 do {
                     self.listPost = try JSONDecoder().decode([Post].self,from: content)
                 } catch {print(error)
                     fatalError("cant decode")}
             
-            
+            }
             
             
             
@@ -211,7 +308,7 @@ class AppSession:ObservableObject,Identifiable{
         }
         
         
-        if let url = URL(string: "https://azur-vo.fr/posts") {
+        if let url = URL(string: "https://api.azur-vo.fr/posts") {
             var request = URLRequest(url: url)
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             if let user = user {
@@ -256,7 +353,7 @@ class AppSession:ObservableObject,Identifiable{
             
             let body = [ "idPost" : post._id!]
             let finalBody = try! JSONSerialization.data(withJSONObject: body)
-            if let url = URL(string: "https://azur-vo.fr/posts/"+post._id!) {
+            if let url = URL(string: "https://api.azur-vo.fr/posts/"+post._id!) {
                 var request = URLRequest(url: url)
                 request.setValue("application/json", forHTTPHeaderField: "Content-Type")
                 
@@ -294,7 +391,7 @@ class AppSession:ObservableObject,Identifiable{
         }
         
         
-        if let url = URL(string: "https://azur-vo.fr/posts/"+post._id!) {
+        if let url = URL(string: "https://api.azur-vo.fr/posts/"+post._id!) {
             var request = URLRequest(url: url)
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             if let user = user {
@@ -335,7 +432,7 @@ class AppSession:ObservableObject,Identifiable{
     
     
     func loadListPlace(){
-        guard let url = URL(string: "https://azur-vo.fr/labels/posts") else {fatalError("url false")}
+        guard let url = URL(string: "https://api.azur-vo.fr/labels/posts") else {fatalError("url false")}
         var request = URLRequest(url : url)
         request.httpMethod = "GET"
         
@@ -357,6 +454,7 @@ class AppSession:ObservableObject,Identifiable{
                 return
             }
             
+            DispatchQueue.main.async {
 
                 do {
                     self.listPlace = try JSONDecoder().decode([Place].self,from: content)
@@ -364,14 +462,14 @@ class AppSession:ObservableObject,Identifiable{
                 } catch {print(error)
                     fatalError("cant decode")}
                 
-            
+            }
             
             
         }.resume()
     }
     
     func loadListTypeResponse(){
-        guard let url = URL(string: "https://azur-vo.fr/labels/comments") else {fatalError("url false")}
+        guard let url = URL(string: "https://api.azur-vo.fr/labels/comments") else {fatalError("url false")}
         var request = URLRequest(url : url)
         request.httpMethod = "GET"
         
@@ -393,13 +491,14 @@ class AppSession:ObservableObject,Identifiable{
                 return
             }
             
+            DispatchQueue.main.async {
 
                 do {
                     self.types = try JSONDecoder().decode([TypeResponse].self,from: content)
                 } catch {print(error)
                     fatalError("cant decode")}
                 
-            
+            }
             
             
         }.resume()
@@ -428,6 +527,12 @@ func filterResponse(listResponse : [Response], typeResponse : String)->[Response
     else{
         return listResponse    }
 }
+
+
+
+
+
+
 
 
 enum UserSessionError: Error {

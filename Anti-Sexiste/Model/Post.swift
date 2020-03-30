@@ -76,20 +76,7 @@ class Post :Identifiable,Codable, ObservableObject{
     }
     
     
-    init(id : String){
-        self.location = ""
-        self._id = ""
-        self.message = ""
-        self.title = ""
-        self.createdAt = nil
-        self.comments = []
-        self.author = nil
-        self.reaction = 0
-        self.report = 0
-        self.updatedAt = nil
-        self.__v = nil
-        self.reloadPost(id : id)
-    }
+
     
     init(placePost : String,idPost : String?,listResponse : [Response]?, message : String, title : String, date : String?, user: String?){
         self.location = placePost
@@ -108,64 +95,7 @@ class Post :Identifiable,Codable, ObservableObject{
         self.init(placePost : "",idPost : nil, listResponse : [], message : "", title : "", date : nil, user : nil)
     }
     
-    
-    func reloadPost(id : String){
-        guard let url = URL(string: "https://azur-vo.fr/posts/"+id) else {fatalError("url false")}
-        var request = URLRequest(url : url)
-        request.httpMethod = "GET"
-        self.location = ""
-        self._id = ""
-        self.message = ""
-        self.title = ""
-        self.createdAt = nil
-        self.comments = []
-        self.author = nil
-        self.reaction = 0
-        self.report = 0
-        self.updatedAt = nil
-        self.__v = nil
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let httpResponse = response as? HTTPURLResponse,
-                  (200...299).contains(httpResponse.statusCode) else {print(response!)
-
-                return
-            }
-            guard error == nil else {
-                print ("error: \(error!)")
-                return
-            }
-            
-            guard let content = data else {
-                print("No data")
-                return
-            }
-
-            DispatchQueue.main.async {
-                do {
-
-                    let post : Post = try JSONDecoder().decode(Post.self, from: content)
-                    self.location = post.location
-                    self._id = post._id
-                    self.message = post.message
-                    self.title = post.title
-                    self.createdAt = post.createdAt
-                    self.comments = post.comments
-                    self.author = post.author
-                    self.reaction = post.reaction
-                    self.report = post.report
-                    self.updatedAt = post.updatedAt
-                    self.__v = post.__v
-                } catch {print(error)
-                    fatalError("cant decode")}
-            }
-            
-            
-            
-        }.resume()
-    }
-    
-    
-    
+  
         
         
       

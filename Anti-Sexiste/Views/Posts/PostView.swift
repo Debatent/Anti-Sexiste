@@ -60,7 +60,7 @@ struct PostView: View {
                                     }
                                     .padding(.leading)
                                 }
-
+                                
                                 ForEach(self.appSession.types) { type in
                                     Button(action: {
                                         self.currentTypeResponse = type.name
@@ -142,22 +142,53 @@ struct PostView: View {
         }.navigationBarItems(trailing:
             HStack{
                 if (appSession.isConnected){
-                    Button(action: {
-                        if (!self.appSession.incrementPost(user: self.appSession.user!, post: self.post)){
-                            self.showingAlert = true
-                        }
-        
-                    }) {
-                        Image(systemName: "plus")
-                    }.alert(isPresented: $showingAlert, content: {self.failureMark})
+                    if(!self.appSession.user!.postReaction.contains(post._id!)){
+                        Button(action: {
+                            
+                            if (!self.appSession.incrementPostReaction(user: self.appSession.user!, post: self.post)){
+                                self.showingAlert = true
+                            }
+                            
+                        }) {
+                            Image(systemName: "plus")
+                        }.alert(isPresented: $showingAlert, content: {self.failureMark})
+                    }else{
+                        Button(action: {
+                            print(self.post._id!)
+                            if (!self.appSession.decrementPostReaction(user: self.appSession.user!, post: self.post)){
+                                self.showingAlert = true
+                            }
+                            
+                        }) {
+                            Image(systemName: "minus")
+                        }.alert(isPresented: $showingAlert, content: {self.failureMark})
+                    }
+                    
                 }
                 VStack{
                     Image(systemName: "flame").foregroundColor(.red)
                     Text(String(self.post.reaction))
                 }
-                
-                
+                if (appSession.isConnected){
+                    if(!self.appSession.user!.postReported.contains(post._id!)){
+                        Button(action: {
+                            
+                            if (!self.appSession.incrementPostReport(user: self.appSession.user!, post: self.post)){
+                                self.showingAlert = true
+                            }
+                            
+                        }) {
+                            Image(systemName: "plus")
+                        }.alert(isPresented: $showingAlert, content: {self.failureMark})
+                    }
+                    
+                }
+                VStack{
+                    Image(systemName: "heart.slash").foregroundColor(.red)
+                    Text(String(self.post.report))
+                }
             }
+            
         )
         
     }
