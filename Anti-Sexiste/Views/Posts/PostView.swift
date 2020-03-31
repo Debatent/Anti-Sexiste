@@ -78,7 +78,7 @@ struct PostView: View {
                         }
                         List{
                             ForEach(filterResponse(listResponse: self.post.comments!, typeResponse: self.currentTypeResponse)){ response in
-                                ListRowResponseView(response:response)
+                                ListRowResponseView(response:response, post : self.post)
                             }
                         }
                     }

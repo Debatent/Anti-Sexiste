@@ -142,7 +142,6 @@ class AppSession: ObservableObject,Identifiable {
                             
                             return
                     }
-                    print(httpResponse)
                     if let error = error {
                         print(error.localizedDescription)
                     }
@@ -181,7 +180,7 @@ class AppSession: ObservableObject,Identifiable {
                     }
                 }.resume()
                 
-                if let index = self.user!.commentReaction.firstIndex(where: {$0 == post._id!}){
+                if let index = self.user!.postReaction.firstIndex(where: {$0 == post._id!}){
                     self.user!.postReaction.remove(at: index)
                 }
                 if let index = self.listPost.firstIndex(where: {$0._id! == post._id!}){
@@ -207,7 +206,6 @@ class AppSession: ObservableObject,Identifiable {
                             
                             return
                     }
-                    print(httpResponse)
                     if let error = error {
                         print(error.localizedDescription)
                     }
@@ -230,7 +228,7 @@ class AppSession: ObservableObject,Identifiable {
     
     
     func incrementCommentReport(user : User, post : Post, response : Response)->Bool{
-        if (!user.postReaction.contains(post._id!)){
+        if (!user.commentReported.contains(response._id!)){
             if let url = URL(string: "https://api.azur-vo.fr/posts/"+post._id!+"/"+response._id!+"/report") {
                 var request = URLRequest(url: url)
                 request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -251,9 +249,11 @@ class AppSession: ObservableObject,Identifiable {
                     
                     
                 }.resume()
-                self.user!.postReported.append(post._id!)
+                self.user!.commentReported.append(response._id!)
                 if let index = self.listPost.firstIndex(where: {$0._id! == post._id!}){
-                    self.listPost[index].report += 1
+                    if let index2 = self.listPost[index].comments!.firstIndex(where: {$0._id! == response._id!}){
+                        self.listPost[index].comments![index2].report += 1
+                    }
                 }
                 return true
             }
@@ -261,8 +261,71 @@ class AppSession: ObservableObject,Identifiable {
         return false
     }
     
+    func incrementCommentReaction(user : User, post : Post, response : Response){
+        if (!user.commentReaction.contains(response._id!)){
+            if let url = URL(string: "https://api.azur-vo.fr/posts/"+post._id!+"/"+response._id!+"/like") {
+                var request = URLRequest(url: url)
+                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.setValue(user.token, forHTTPHeaderField: "auth-token")
+                request.httpMethod = "POST"
+                
+                URLSession.shared.dataTask(with: request){data, response, error in
+                    guard let httpResponse = response as? HTTPURLResponse,
+                        (200...299).contains(httpResponse.statusCode) else {print(response!)
+                            
+                            return
+                    }
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+                    
+                    
+                    
+                    
+                }.resume()
+                self.user!.commentReaction.append(response._id!)
+                if let index = self.listPost.firstIndex(where: {$0._id! == post._id!}){
+                    if let index2 = self.listPost[index].comments!.firstIndex(where: {$0._id! == response._id!}){
+                        self.listPost[index].comments![index2].reaction += 1
+                   
+
+                    }
+                }
+            }
+        }
+    }
     
-    		
+        func decrementCommentReaction(user : User, post : Post, response : Response){
+            if (user.commentReaction.contains(response._id!)){
+                if let url = URL(string: "https://api.azur-vo.fr/posts/"+post._id!+"/"+response._id!+"/unlike") {
+                    var request = URLRequest(url: url)
+                    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                    request.setValue(user.token, forHTTPHeaderField: "auth-token")
+                    request.httpMethod = "DELETE"
+                    
+                    URLSession.shared.dataTask(with: request){data, response, error in
+                        guard let httpResponse = response as? HTTPURLResponse,
+                            (200...299).contains(httpResponse.statusCode) else {print(response!)
+                                
+                                return
+                        }
+                        if let error = error {
+                            print(error.localizedDescription)
+                        }
+                        
+                        
+                    }.resume()
+                    if let index = self.user!.commentReaction.firstIndex(where: {$0 == response._id!}){
+                        self.user!.commentReaction.remove(at: index)
+                    }
+                    if let index = self.listPost.firstIndex(where: {$0._id! == post._id!}){
+                        if let index2 = self.listPost[index].comments!.firstIndex(where: {$0._id! == response._id!}){
+                            self.listPost[index].comments![index2].reaction -= 1
+                        }
+                    }
+                }
+            }
+        }
     
     func loadListPost(){
         guard let url = URL(string: "https://api.azur-vo.fr/posts") else {fatalError("url false")}
@@ -401,7 +464,6 @@ class AppSession: ObservableObject,Identifiable {
             
             request.httpMethod = "POST"
             request.httpBody = data
-            print(String(data: data, encoding: String.Encoding.utf8) ?? "Data could not be printed")
             URLSession.shared.dataTask(with: request){data, response, error in
                 guard let httpResponse = response as? HTTPURLResponse,
                     (200...299).contains(httpResponse.statusCode) else {print(response!)
@@ -458,7 +520,6 @@ class AppSession: ObservableObject,Identifiable {
 
                 do {
                     self.listPlace = try JSONDecoder().decode([Place].self,from: content)
-                    print(self.listPlace)
                 } catch {print(error)
                     fatalError("cant decode")}
                 

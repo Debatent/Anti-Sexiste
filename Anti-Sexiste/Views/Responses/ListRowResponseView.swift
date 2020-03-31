@@ -10,25 +10,55 @@ import SwiftUI
 
 struct ListRowResponseView: View {
     @EnvironmentObject var appSession : AppSession
-
-    var response : Response
-    init(response : Response){
-        self.response = response
+    @State private var showingAlertComment = false
+    @State private var showingAlertCommentReport = false
+      
+      var failureNotConnected: Alert {
+          Alert(title: Text("Echec"), message: Text("Connectez vous pour pouvoir interagir avec la communautée."), dismissButton: .default(Text("Ok")))
+      }
+    
+    var failureMarkCommentReport: Alert {
+        Alert(title: Text("Echec"), message: Text("Vous avez déjà signalé ce post."), dismissButton: .default(Text("Ok")))
     }
+    @ObservedObject var response : Response
+    @ObservedObject var post : Post
+
     
     var body: some View {
         HStack{
             Text(response.message)
             Spacer()
-            VStack{
-                Image(systemName: "flame")
-                    .foregroundColor(.red)
-                Text(String(response.reaction))
-            }
-            VStack{
-                Image(systemName: "heart.slash")
-                    .foregroundColor(.red)
-                Text(String(response.report))
+            HStack{
+                VStack{
+                    Image(systemName: "flame").foregroundColor(.red)
+                    Text(String(self.response.reaction))
+                }.gesture(TapGesture().onEnded() {
+                    if(self.appSession.isConnected){
+                        if(!self.appSession.user!.commentReaction.contains(self.response._id!)){
+                            self.appSession.incrementCommentReaction(user: self.appSession.user!, post: self.post, response: self.response)
+                        }else{
+                            self.appSession.decrementCommentReaction(user: self.appSession.user!, post: self.post, response : self.response)
+                        }
+                    }else{
+                        self.showingAlertComment = true
+                    }
+                }).alert(isPresented: $showingAlertComment, content: {self.failureNotConnected})
+                
+
+                VStack{
+                    Image(systemName: "heart.slash").foregroundColor(.red)
+                    Text(String(self.response.report))
+                }.gesture(TapGesture().onEnded() {
+                    if (self.appSession.isConnected){
+                        if(!self.appSession.incrementCommentReport(user: self.appSession.user!, post: self.post, response : self.response)){
+                            self.showingAlertCommentReport = true
+                        }
+                        
+                    }else{
+                        self.showingAlertComment = true
+                    }
+                }).alert(isPresented: $showingAlertCommentReport, content: {self.failureMarkCommentReport})
+                
             }
         }
         
@@ -37,6 +67,6 @@ struct ListRowResponseView: View {
 
 struct ListRowResponseView_Previews: PreviewProvider {
     static var previews: some View {
-        ListRowResponseView(response: Response())
+        ListRowResponseView(response: Response(), post : Post())
     }
 }
