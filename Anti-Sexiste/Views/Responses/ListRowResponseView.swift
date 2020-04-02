@@ -12,17 +12,17 @@ struct ListRowResponseView: View {
     @EnvironmentObject var appSession : AppSession
     @State private var showingAlertComment = false
     @State private var showingAlertCommentReport = false
-      
-      var failureNotConnected: Alert {
-          Alert(title: Text("Echec"), message: Text("Connectez vous pour pouvoir interagir avec la communautée."), dismissButton: .default(Text("Ok")))
-      }
+    
+    var failureNotConnected: Alert {
+        Alert(title: Text("Echec"), message: Text("Connectez vous pour pouvoir interagir avec la communautée."), dismissButton: .default(Text("Ok")))
+    }
     
     var failureMarkCommentReport: Alert {
         Alert(title: Text("Echec"), message: Text("Vous avez déjà signalé ce post."), dismissButton: .default(Text("Ok")))
     }
     @ObservedObject var response : Response
     @ObservedObject var post : Post
-
+    
     
     var body: some View {
         HStack{
@@ -44,7 +44,7 @@ struct ListRowResponseView: View {
                     }
                 }).alert(isPresented: $showingAlertComment, content: {self.failureNotConnected})
                 
-
+                
                 VStack{
                     Image(systemName: "heart.slash").foregroundColor(.red)
                     Text(String(self.response.report))

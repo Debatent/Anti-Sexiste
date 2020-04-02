@@ -16,7 +16,7 @@ class AppSession: ObservableObject,Identifiable {
     @Published var listPost : [Post] = []
     @Published var listPlace : [Place] = []
     @Published var types : [TypeResponse] = []
-
+    
     init(user : User?){
         self.user = user
         
@@ -287,45 +287,45 @@ class AppSession: ObservableObject,Identifiable {
                 if let index = self.listPost.firstIndex(where: {$0._id! == post._id!}){
                     if let index2 = self.listPost[index].comments!.firstIndex(where: {$0._id! == response._id!}){
                         self.listPost[index].comments![index2].reaction += 1
-                   
-
+                        
+                        
                     }
                 }
             }
         }
     }
     
-        func decrementCommentReaction(user : User, post : Post, response : Response){
-            if (user.commentReaction.contains(response._id!)){
-                if let url = URL(string: "https://api.azur-vo.fr/posts/"+post._id!+"/"+response._id!+"/unlike") {
-                    var request = URLRequest(url: url)
-                    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-                    request.setValue(user.token, forHTTPHeaderField: "auth-token")
-                    request.httpMethod = "DELETE"
-                    
-                    URLSession.shared.dataTask(with: request){data, response, error in
-                        guard let httpResponse = response as? HTTPURLResponse,
-                            (200...299).contains(httpResponse.statusCode) else {print(response!)
-                                
-                                return
-                        }
-                        if let error = error {
-                            print(error.localizedDescription)
-                        }
-                        
-                        
-                    }.resume()
-                    if let index = self.user!.commentReaction.firstIndex(where: {$0 == response._id!}){
-                        self.user!.commentReaction.remove(at: index)
+    func decrementCommentReaction(user : User, post : Post, response : Response){
+        if (user.commentReaction.contains(response._id!)){
+            if let url = URL(string: "https://api.azur-vo.fr/posts/"+post._id!+"/"+response._id!+"/unlike") {
+                var request = URLRequest(url: url)
+                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.setValue(user.token, forHTTPHeaderField: "auth-token")
+                request.httpMethod = "DELETE"
+                
+                URLSession.shared.dataTask(with: request){data, response, error in
+                    guard let httpResponse = response as? HTTPURLResponse,
+                        (200...299).contains(httpResponse.statusCode) else {print(response!)
+                            
+                            return
                     }
-                    if let index = self.listPost.firstIndex(where: {$0._id! == post._id!}){
-                        if let index2 = self.listPost[index].comments!.firstIndex(where: {$0._id! == response._id!}){
-                            self.listPost[index].comments![index2].reaction -= 1
-                        }
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+                    
+                    
+                }.resume()
+                if let index = self.user!.commentReaction.firstIndex(where: {$0 == response._id!}){
+                    self.user!.commentReaction.remove(at: index)
+                }
+                if let index = self.listPost.firstIndex(where: {$0._id! == post._id!}){
+                    if let index2 = self.listPost[index].comments!.firstIndex(where: {$0._id! == response._id!}){
+                        self.listPost[index].comments![index2].reaction -= 1
                     }
                 }
             }
         }
+    }
     
     func loadListPost(){
         guard let url = URL(string: "https://api.azur-vo.fr/posts") else {fatalError("url false")}
@@ -350,12 +350,12 @@ class AppSession: ObservableObject,Identifiable {
                 return
             }
             DispatchQueue.main.async {
-
+                
                 do {
                     self.listPost = try JSONDecoder().decode([Post].self,from: content)
                 } catch {print(error)
                     fatalError("cant decode")}
-            
+                
             }
             
             
@@ -500,9 +500,9 @@ class AppSession: ObservableObject,Identifiable {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             guard let httpResponse = response as? HTTPURLResponse,
-                  (200...299).contains(httpResponse.statusCode) else {print(response!)
-
-                return
+                (200...299).contains(httpResponse.statusCode) else {print(response!)
+                    
+                    return
             }
             // ensure there is no error for this HTTP response
             guard error == nil else {
@@ -517,7 +517,7 @@ class AppSession: ObservableObject,Identifiable {
             }
             
             DispatchQueue.main.async {
-
+                
                 do {
                     self.listPlace = try JSONDecoder().decode([Place].self,from: content)
                 } catch {print(error)
@@ -536,9 +536,9 @@ class AppSession: ObservableObject,Identifiable {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             guard let httpResponse = response as? HTTPURLResponse,
-                  (200...299).contains(httpResponse.statusCode) else {print(response!)
-
-                return
+                (200...299).contains(httpResponse.statusCode) else {print(response!)
+                    
+                    return
             }
             // ensure there is no error for this HTTP response
             guard error == nil else {
@@ -553,7 +553,7 @@ class AppSession: ObservableObject,Identifiable {
             }
             
             DispatchQueue.main.async {
-
+                
                 do {
                     self.types = try JSONDecoder().decode([TypeResponse].self,from: content)
                 } catch {print(error)

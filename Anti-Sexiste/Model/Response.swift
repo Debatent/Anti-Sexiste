@@ -20,12 +20,12 @@ class Response: Identifiable, Codable, ObservableObject{
     var type: String
     
     @Published var author : String?
-        
+    
     @Published var reaction : Int
     
     @Published var report : Int
-
-
+    
+    
     
     enum CodingKeys: String, CodingKey {
         case _id
@@ -38,28 +38,28 @@ class Response: Identifiable, Codable, ObservableObject{
     }
     
     required init(from decoder: Decoder) throws {
-            do {
-                let values = try decoder.container(keyedBy: CodingKeys.self)
-                self._id = try values.decodeIfPresent(String.self, forKey: ._id)
-                self.message = try values.decode(String.self, forKey: .message)
-                self.createdAt = try values.decode(String.self, forKey: .createdAt)
-                self.type = try values.decode(String.self, forKey: .type)
-                self.author = try values.decodeIfPresent(String.self, forKey: .author)
-                self.reaction = try values.decode(Int.self, forKey: .reaction)
-                self.report = try values.decode(Int.self, forKey: .report)
-
-
-            } catch {print(error)
-                fatalError("cant decode")}
-        }
-
+        do {
+            let values = try decoder.container(keyedBy: CodingKeys.self)
+            self._id = try values.decodeIfPresent(String.self, forKey: ._id)
+            self.message = try values.decode(String.self, forKey: .message)
+            self.createdAt = try values.decode(String.self, forKey: .createdAt)
+            self.type = try values.decode(String.self, forKey: .type)
+            self.author = try values.decodeIfPresent(String.self, forKey: .author)
+            self.reaction = try values.decode(Int.self, forKey: .reaction)
+            self.report = try values.decode(Int.self, forKey: .report)
+            
+            
+        } catch {print(error)
+            fatalError("cant decode")}
+    }
+    
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(message, forKey: .message)
         try container.encode(type, forKey: .type)
         try container.encodeIfPresent(author, forKey: .author)
-
+        
     }
     
     

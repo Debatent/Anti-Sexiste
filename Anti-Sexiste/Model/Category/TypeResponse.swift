@@ -25,12 +25,12 @@ class TypeResponse:Identifiable,Codable{
     }
     
     required init(from decoder: Decoder) throws {
-            do {
-                let values = try decoder.container(keyedBy: CodingKeys.self)
-                self.name = try values.decode(String.self, forKey: .name)
-
-
-            } catch {print(error)
-                fatalError("cant decode")}
-        }
+        do {
+            let values = try decoder.container(keyedBy: CodingKeys.self)
+            self.name = try values.decode(String.self, forKey: .name)
+            
+            
+        } catch {print(error)
+            fatalError("cant decode")}
+    }
 }

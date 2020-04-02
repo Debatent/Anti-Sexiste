@@ -15,7 +15,7 @@ class Post :Identifiable,Codable, ObservableObject{
     var location: String
     
     var _id: String?
-    	
+    
     @Published var comments: [Response]?
     
     var message: String
@@ -49,24 +49,24 @@ class Post :Identifiable,Codable, ObservableObject{
     }
     
     required init(from decoder: Decoder) throws {
-            do {
-                let values = try decoder.container(keyedBy: CodingKeys.self)
-                self.location = try values.decode(String.self, forKey: .location)
-                self._id = try values.decodeIfPresent(String.self, forKey: ._id)
-                self.message = try values.decode(String.self, forKey: .message)
-                self.title = try values.decode(String.self, forKey: .title)
-                self.createdAt = try values.decodeIfPresent(String.self, forKey: .createdAt)
-                self.comments = try values.decodeIfPresent([Response].self, forKey: .comments)
-                self.author = try values.decodeIfPresent(String.self, forKey: .author)
-                self.reaction = try values.decode(Int.self, forKey: .reaction)
-                self.report = try values.decode(Int.self, forKey: .report)
-                self.updatedAt = try values.decodeIfPresent(String.self, forKey: .updatedAt)
-                self.__v = try values.decodeIfPresent(Int.self, forKey: .__v)
-
-            } catch {print(error)
-                fatalError("cant decode")}
-        }
-
+        do {
+            let values = try decoder.container(keyedBy: CodingKeys.self)
+            self.location = try values.decode(String.self, forKey: .location)
+            self._id = try values.decodeIfPresent(String.self, forKey: ._id)
+            self.message = try values.decode(String.self, forKey: .message)
+            self.title = try values.decode(String.self, forKey: .title)
+            self.createdAt = try values.decodeIfPresent(String.self, forKey: .createdAt)
+            self.comments = try values.decodeIfPresent([Response].self, forKey: .comments)
+            self.author = try values.decodeIfPresent(String.self, forKey: .author)
+            self.reaction = try values.decode(Int.self, forKey: .reaction)
+            self.report = try values.decode(Int.self, forKey: .report)
+            self.updatedAt = try values.decodeIfPresent(String.self, forKey: .updatedAt)
+            self.__v = try values.decodeIfPresent(Int.self, forKey: .__v)
+            
+        } catch {print(error)
+            fatalError("cant decode")}
+    }
+    
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
@@ -76,7 +76,7 @@ class Post :Identifiable,Codable, ObservableObject{
     }
     
     
-
+    
     
     init(placePost : String,idPost : String?,listResponse : [Response]?, message : String, title : String, date : String?, user: String?){
         self.location = placePost
@@ -95,10 +95,10 @@ class Post :Identifiable,Codable, ObservableObject{
         self.init(placePost : "",idPost : nil, listResponse : [], message : "", title : "", date : nil, user : nil)
     }
     
-  
-        
-        
-      
-    }
     
+    
+    
+    
+}
+
 

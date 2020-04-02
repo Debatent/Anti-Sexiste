@@ -40,7 +40,7 @@ struct AddPostView: View {
                         self.post.author = self.appSession.user!.pseudo
                     }
                     self.appSession.addPost(post: self.post, user : self.appSession.user)
-
+                    
                     self.post = Post()
                     self.showingAddPostView = false
                 }) {

@@ -32,22 +32,22 @@ class User: Codable, ObservableObject{
     }
     
     required init(from decoder: Decoder) throws {
-            do {
-                let values = try decoder.container(keyedBy: CodingKeys.self)
-                self.pseudo = try values.decode(String.self, forKey: .pseudo)
-                self.email = try values.decode(String.self, forKey: .email)
-                self.password = ""
-                self.postReaction = try values.decode([String].self, forKey: .postReaction)
-                self.postReported = []
-                self.commentReaction = try values.decode([String].self, forKey: .commentReaction)
-                self.commentReported = []
-                self._id = try values.decode(String.self, forKey: ._id)
-
-
-            } catch {print(error)
-                fatalError("cant decode")}
-        }
-
+        do {
+            let values = try decoder.container(keyedBy: CodingKeys.self)
+            self.pseudo = try values.decode(String.self, forKey: .pseudo)
+            self.email = try values.decode(String.self, forKey: .email)
+            self.password = ""
+            self.postReaction = try values.decode([String].self, forKey: .postReaction)
+            self.postReported = []
+            self.commentReaction = try values.decode([String].self, forKey: .commentReaction)
+            self.commentReported = []
+            self._id = try values.decode(String.self, forKey: ._id)
+            
+            
+        } catch {print(error)
+            fatalError("cant decode")}
+    }
+    
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)

@@ -15,7 +15,7 @@ struct ContentView: View {
     
     
     @State private var showingAlert = false
-
+    
     @State var showingAddPostView = false
     
     @State var currentPlace : String = "Tout"
@@ -28,13 +28,13 @@ struct ContentView: View {
             ZStack {
                 
                 VStack{
-
+                    
                     ScrollView(.horizontal, showsIndicators: false) {
                         
                         HStack {
                             Button(action: {
                                 self.currentPlace = "Tout"
-                                    
+                                
                                 
                             }) {
                                 VStack{
@@ -49,7 +49,7 @@ struct ContentView: View {
                             ForEach(self.appSession.listPlace) { place in
                                 Button(action: {
                                     self.currentPlace = place.name
-                                        
+                                    
                                     
                                 }) {
                                     VStack{
@@ -76,7 +76,7 @@ struct ContentView: View {
                             NavigationLink(destination: PostView(post: self.appSession.listPost.filter { $0._id! == post._id! }[0]).environmentObject(self.appSession)){
                                 ListRowPostView(post:post).environmentObject(self.appSession)
                             }
-
+                            
                         }
                     }
                 }
@@ -131,8 +131,8 @@ struct ContentView: View {
             
             
         }.alert(isPresented: $showingAlert) {
-        Alert(title: Text("Zzziouuuuff"), message: Text("Vous avez été déconnecté !"), dismissButton: .default(Text("Super")))
-            }
+            Alert(title: Text("Zzziouuuuff"), message: Text("Vous avez été déconnecté !"), dismissButton: .default(Text("Super")))
+        }
     }
     
 }

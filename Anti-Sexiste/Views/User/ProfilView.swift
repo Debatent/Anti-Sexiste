@@ -14,6 +14,7 @@ struct ProfilView: View {
     var body: some View {
         VStack{
             if(appSession.isConnected){
+                Text("Bonjour")
                 Text(appSession.user!.pseudo)
             }
         }

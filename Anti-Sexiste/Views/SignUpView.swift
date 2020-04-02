@@ -12,7 +12,7 @@ struct SignUpView: View {
     @EnvironmentObject var appSession : AppSession
     @State var user : User = User()
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-
+    
     
     
     
@@ -53,7 +53,7 @@ struct SignUpView: View {
                         .padding(.horizontal, 20)
                 }
             }
-        
+            
         }
         
     }
